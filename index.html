@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>OpenAstrologer - 100% Free Open Vedic Astrologer (Zero Fees, Zero OTP)</title>
+  <meta name="description" content="Talk to OpenAstrologer Free AI Vedic Astrologer. Instant answers on Career, Marriage timing, Shani Sade Sati, Gemstones, and Kundali Dosha without phone number or payments. 100% private.">
+
+  <!-- Dynamic SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M16 6l3 7 7 3-7 3-3 7-3-7-7-3 7-3z' fill='%23f59e0b'/%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%2338bdf8'/%3E%3Ccircle cx='24' cy='8' r='1.5' fill='%2338bdf8'/%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card: #151f32;
+      --card-inner: #0d1526;
+      --border: #223249;
+      --border-focus: #f59e0b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #f59e0b;
+      --primary-hover: #d97706;
+      --accent: #10b981;
+      --danger: #ef4444;
+      --radius: 12px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3.5rem 1rem;
+    }
+    header { text-align: center; margin-bottom: 1.5rem; }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .brand-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .brand-badge {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--primary);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      text-transform: uppercase;
+    }
+    .lang-toggle-btn {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      color: var(--primary);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .lang-toggle-btn:hover {
+      border-color: var(--primary);
+      background: rgba(245, 158, 11, 0.1);
+    }
+    header h1 {
+      font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    header p {
+      color: var(--muted);
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--card-inner);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+      margin-bottom: 0.8rem;
+    }
+    select:focus, input:focus { border-color: var(--border-focus); }
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 500px) {
+      .input-row { grid-template-columns: 1fr; }
+    }
+
+    /* CHAT WINDOW */
+    .chat-box {
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      background: var(--card-inner);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .chat-header {
+      background: #090d16;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+    .astro-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 6px var(--accent);
+    }
+    .chat-body {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg {
+      max-width: 86%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+    .msg-astro {
+      align-self: flex-start;
+      background: #172338;
+      color: #f1f5f9;
+      border: 1px solid #283a55;
+      border-bottom-left-radius: 2px;
+    }
+    .msg-user {
+      align-self: flex-end;
+      background: var(--primary);
+      color: #0b1120;
+      font-weight: 600;
+      border-bottom-right-radius: 2px;
+    }
+    .quick-chips-bar {
+      display: flex;
+      gap: 6px;
+      padding: 8px 12px;
+      overflow-x: auto;
+      background: #0d1526;
+      border-top: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .chip:hover {
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .chat-footer {
+      display: flex;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #090d16;
+      border-top: 1px solid var(--border);
+    }
+    .chat-footer input {
+      margin-bottom: 0;
+      flex: 1;
+    }
+    .send-btn {
+      padding: 10px 18px;
+      background: var(--primary);
+      color: #0b1120;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .send-btn:hover { background: var(--primary-hover); }
+
+    .ecosystem-section {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+    }
+    .ecosystem-section h3 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+    .ecosystem-section p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1.25rem;
+    }
+    .eco-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .eco-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.15s ease;
+    }
+    .eco-card:hover { border-color: var(--primary); }
+    .eco-card strong {
+      display: block;
+      font-size: 0.88rem;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .eco-card span { font-size: 0.75rem; color: var(--muted); }
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- GLOBAL NETWORK HEADER -->
+  <div id="quicktools-global-bar" style="background:#090d16; border-bottom:1px solid #1e293b; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; font-family:system-ui, -apple-system, sans-serif; font-size:13px; z-index:99999; position:relative; width:100%; box-sizing:border-box;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <a href="https://unknownuniversem-blip.github.io/" style="color:#f8fafc; font-weight:700; text-decoration:none; display:flex; align-items:center; gap:6px;">
+        <span style="background:#38bdf8; color:#0b1120; font-size:10px; font-weight:900; padding:2px 6px; border-radius:4px;">HUB</span>
+        <span>QuickTools</span>
+      </a>
+    </div>
+    <div style="display:flex; align-items:center; gap:12px; overflow-x:auto;">
+      <a href="https://unknownuniversem-blip.github.io/open-astrologer/" style="color:#f59e0b; text-decoration:none; font-weight:700; white-space:nowrap;">🔮 OpenAstrologer</a>
+      <span style="color:#334155;">|</span>
+      <a href="https://unknownuniversem-blip.github.io/panchang-choghadiya/" style="color:#f59e0b; text-decoration:none; font-weight:600; white-space:nowrap;">🕉️ पंचांग व मुहूर्त</a>
+      <span style="color:#334155;">|</span>
+      <a href="https://unknownuniversem-blip.github.io/age-eligibility-calc/" style="color:#38bdf8; text-decoration:none; font-weight:600; white-space:nowrap;">⏱ Age Calculator</a>
+      <span style="color:#334155;">|</span>
+      <a href="https://unknownuniversem-blip.github.io/passport-photo-grid/" style="color:#94a3b8; text-decoration:none; font-weight:600; white-space:nowrap;">📷 Passport Grid</a>
+      <span style="color:#334155;">|</span>
+      <a href="https://unknownuniversem-blip.github.io/gst-quick-calc/" style="color:#94a3b8; text-decoration:none; font-weight:600; white-space:nowrap;">🧾 GST Calc</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <header>
+      <div class="header-top">
+        <div class="brand-box">
+          <svg width="34" height="34" viewBox="0 0 32 32">
+            <rect width="32" height="32" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+            <path d="M16 6l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#f59e0b"/>
+            <circle cx="8" cy="8" r="1.5" fill="#38bdf8"/>
+            <circle cx="24" cy="8" r="1.5" fill="#38bdf8"/>
+          </svg>
+          <span class="brand-name">Open<span style="color:#f59e0b;">Astrologer</span></span>
+          <span class="brand-badge">100% Free AI Vedic Guidance</span>
+        </div>
+        <button type="button" class="lang-toggle-btn" onclick="toggleLanguage()">
+          🌐 <span id="btnLangText">हिंदी में बदलें (Hindi)</span>
+        </button>
+      </div>
+
+      <h1 id="txtTitle">OpenAstrologer - 100% Free Vedic Astrologer Chat</h1>
+      <p id="txtSubtitle">Ask questions about your career, marriage timing, Shani Sade Sati, gemstones, and remedies without registration, fees, or waiting.</p>
+    </header>
+
+    <div class="card">
+      <div class="input-row">
+        <div>
+          <label id="lblRashi">Your Moon Sign / Rashi (आपकी राशि)</label>
+          <select id="selRashi">
+            <option value="Mesh">Aries (मेष)</option>
+            <option value="Vrishabha">Taurus (वृषभ)</option>
+            <option value="Mithun">Gemini (मिथुन)</option>
+            <option value="Kark">Cancer (कर्क)</option>
+            <option value="Simha" selected>Leo (सिंह)</option>
+            <option value="Kanya">Virgo (कन्या)</option>
+            <option value="Tula">Libra (तुला)</option>
+            <option value="Vrishchik">Scorpio (वृश्चिक)</option>
+            <option value="Dhanu">Sagittarius (धनु)</option>
+            <option value="Makar">Capricorn (मकर)</option>
+            <option value="Kumbh">Aquarius (कुंभ)</option>
+            <option value="Meen">Pisces (मीन)</option>
+          </select>
+        </div>
+        <div>
+          <label id="lblBirthYear">Birth Year (जन्म वर्ष)</label>
+          <input type="number" id="inputYear" value="1998" min="1940" max="2026">
+        </div>
+      </div>
+
+      <!-- CHAT CONTAINER -->
+      <div class="chat-box">
+        <div class="chat-header">
+          <div class="astro-info">
+            <span class="status-dot"></span>
+            <strong style="color:#fff; font-size:0.92rem;" id="txtAstroName">Acharya OpenAstrologer (Online)</strong>
+          </div>
+          <span style="font-size:0.75rem; color:var(--accent); font-weight:700;">FREE FOREVER</span>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+          <div class="msg msg-astro" id="msgWelcome">
+            🙏 <strong>Namaste!</strong> I am your open Vedic Astrologer. No fees, wallet recharges, or phone numbers needed. Ask me about your <strong>Career, Marriage, Shani Sade Sati, or Gemstones</strong>!
+          </div>
+        </div>
+
+        <!-- QUICK PROMPT CHIPS -->
+        <div class="quick-chips-bar">
+          <span class="chip" onclick="askQuick('When will I get a job or promotion in my career?')">💼 Career & Job</span>
+          <span class="chip" onclick="askQuick('When is my marriage yoga forming?')">💍 Marriage Timing</span>
+          <span class="chip" onclick="askQuick('Am I affected by Shani Sade Sati right now?')">🪐 Shani Sade Sati</span>
+          <span class="chip" onclick="askQuick('Which gemstone and lucky color suit my Rashi?')">💎 Lucky Gemstone</span>
+          <span class="chip" onclick="askQuick('What is my lucky number and business remedy?')">🍀 Lucky Remedy</span>
+        </div>
+
+        <div class="chat-footer">
+          <input type="text" id="userInput" placeholder="Ask your astrology question..." onkeypress="handleKey(event)">
+          <button class="send-btn" onclick="sendMessage()" id="btnSend">Send ➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZERO STORAGE PLEDGE -->
+    <div style="display:flex; align-items:center; gap:10px; background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.25); border-radius:8px; padding:10px 14px;">
+      <span style="font-size:1.2rem;">🔒</span>
+      <span style="font-size:0.78rem; color:var(--muted);" id="txtZeroStorage">100% Private & In-Browser: No mobile numbers, chats, or personal queries are ever stored on any server.</span>
+    </div>
+
+    <!-- ECOSYSTEM -->
+    <div class="ecosystem-section">
+      <h3 id="txtEcoHead">More Free Client-Side Tools</h3>
+      <p id="txtEcoSub">Discover fast, privacy-first web utilities from the QuickTools network.</p>
+      <div class="eco-grid">
+        <a href="https://unknownuniversem-blip.github.io/panchang-choghadiya/" class="eco-card">
+          <strong>🕉️ Panchang, Muhurat & Kundali</strong>
+          <span>Day & Night Choghadiya, Rahu Kaal, Tithi, and 36 Guna Ashtakoot matching.</span>
+        </a>
+        <a href="https://unknownuniversem-blip.github.io/age-eligibility-calc/" class="eco-card">
+          <strong>⏱ Age & Eligibility Calculator</strong>
+          <span>Calculate exact age on cut-off dates for Bank PO, Clerk, and UPSC exams.</span>
+        </a>
+        <a href="https://unknownuniversem-blip.github.io/land-converter/" class="eco-card">
+          <strong>🌾 UP & Bihar Land Area Converter</strong>
+          <span>Convert Bigha, Biswa, Kattha, Dhur, Gaj to Sq Ft and estimate registry fees.</span>
+        </a>
+        <a href="https://unknownuniversem-blip.github.io/passport-photo-grid/" class="eco-card">
+          <strong>📷 Passport Photo Grid Maker</strong>
+          <span>Create 300 DPI printable 4x6 / A4 photo sheets with Name & DOP exam strip.</span>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <div>OpenAstrologer &copy; 2026. 100% Free Client-Side Vedic Astrology Utility.</div>
+    </footer>
+  </div>
+
+  <script>
+    let currentLang = 'en';
+
+    const rashiData = {
+      Mesh: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Red / Saffron', num: 9, sadeSatiEn: 'No active Sade Sati. Strong Martian energy.', sadeSatiHi: 'साढ़े साती नहीं है। मंगल का प्रभाव मजबूत है।', careerEn: 'Technical roles, defense, engineering, real estate, and leadership.', careerHi: 'इंजीनियरिंग, पुलिस/सेना, रियल एस्टेट व तकनीकी क्षेत्रों में सफलता।' },
+      Vrishabha: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Opal / Diamond (ओपल / हीरा)', colorEn: 'White / Cream', num: 6, sadeSatiEn: 'Neutral transit. Jupiter transit grants steady family growth.', sadeSatiHi: 'साढ़े साती से मुक्त। गुरु के गोचर से पारिवारिक स्थिरता।', careerEn: 'Banking, finance, luxury goods, arts, food, and architecture.', careerHi: 'बैंकिंग, वित्त, फैशन, कला व खाद्य व्यवसाय में लाभ।' },
+      Mithun: { lordEn: 'Mercury (बुध)', lordHi: 'बुध', stoneEn: 'Emerald (पन्ना)', colorEn: 'Green (हरा)', num: 5, sadeSatiEn: 'Free from Sade Sati. Favorable for communication and trade.', sadeSatiHi: 'साढ़े साती नहीं है। व्यापार और बौद्धिक कार्यों के लिए उत्तम।', careerEn: 'IT, coding, media, trading, analytics, and consultancy.', careerHi: 'आईटी, संचार, मीडिया, व्यापार और कंसल्टेंसी।' },
+      Kark: { lordEn: 'Moon (चंद्र)', lordHi: 'चंद्रमा', stoneEn: 'Pearl (मोती)', colorEn: 'Silver / White', num: 2, sadeSatiEn: 'Under Shani Dhaiya influence; maintain financial patience.', sadeSatiHi: 'शनि की ढैय्या का प्रभाव है। खर्चों पर नियंत्रण रखें।', careerEn: 'Healthcare, administration, education, hospitality, and psychology.', careerHi: 'चिकित्सा, शिक्षा, प्रशासन, होटल व जनसेवा।' },
+      Simha: { lordEn: 'Sun (सूर्य)', lordHi: 'सूर्य देव', stoneEn: 'Ruby (माणिक्य)', colorEn: 'Golden / Orange', num: 1, sadeSatiEn: 'Clear of Sade Sati. Solar energy supports promotion.', sadeSatiHi: 'साढ़े साती नहीं है। पदोन्नति और यश के अच्छे योग।', careerEn: 'Government civil services, executive management, and politics.', careerHi: 'सरकारी नौकरी, प्रशासनिक सेवा व नेतृत्व वाले पद।' },
+      Kanya: { lordEn: 'Mercury (बुध)', lordHi: 'बुध', stoneEn: 'Emerald (पन्ना)', colorEn: 'Light Green', num: 5, sadeSatiEn: 'Clear of Sade Sati. Analytical skills give strong advantages.', sadeSatiHi: 'साढ़े साती से मुक्त। बौद्धिक कार्यों में बड़ी सफलता।', careerEn: 'Audit, accounting, medicine, pharmacy, and research.', careerHi: 'ऑडिट, अकाउंट्स, चिकित्सा, अनुसंधान व लेखन।' },
+      Tula: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Diamond / Zircon (हीरा / जरकन)', colorEn: 'Sky Blue / White', num: 6, sadeSatiEn: 'Favorable planetary position. High personal harmony.', sadeSatiHi: 'साढ़े साती नहीं है। जीवन में सुख व सौहार्द के योग।', careerEn: 'Law, judiciary, fashion, interior design, and international trade.', careerHi: 'वकालत, फैशन, इंटीरियर डिजाइनिंग व व्यवसाय।' },
+      Vrishchik: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Dark Red / Maroon', num: 9, sadeSatiEn: 'Under Shani Dhaiya phase. Practice Hanuman Chalisa regularly.', sadeSatiHi: 'शनि की ढैय्या सक्रिय है। नियमित हनुमान चालीसा पढ़ें।', careerEn: 'Pharmaceuticals, surgery, defense, chemistry, and investigation.', careerHi: 'फार्मा, सर्जरी, रक्षा विभाग व खोजी कार्य।' },
+      Dhanu: { lordEn: 'Jupiter (गुरु)', lordHi: 'बृहस्पति (गुरु)', stoneEn: 'Yellow Sapphire (पुखराज)', colorEn: 'Yellow (पीला)', num: 3, sadeSatiEn: 'Completely free from Sade Sati. Exceptional spiritual & career rise.', sadeSatiHi: 'साढ़े साती से पूरी तरह मुक्त। करियर में उन्नति का समय।', careerEn: 'Higher education, advisory, banking, spirituality, and publishing.', careerHi: 'शिक्षा, वित्त, परामर्श, कानून व प्रकाशन।' },
+      Makar: { lordEn: 'Saturn (शनि)', lordHi: 'शनि देव', stoneEn: 'Blue Sapphire (नीलम) / Amethyst', colorEn: 'Navy Blue / Black', num: 8, sadeSatiEn: 'Final descending phase (Utarti) of Sade Sati. Steady relief arriving.', sadeSatiHi: 'साढ़े साती का अंतिम चरण (उतरती)। राहत और लाभ के योग।', careerEn: 'Infrastructure, mining, manufacturing, law, and logistics.', careerHi: 'निर्माण, मैन्युफैक्चरिंग, कृषि व लॉजिस्टिक्स।' },
+      Kumbh: { lordEn: 'Saturn (शनि)', lordHi: 'शनि देव', stoneEn: 'Blue Sapphire (नीलम)', colorEn: 'Electric Blue', num: 8, sadeSatiEn: 'Peak phase of Sade Sati. Avoid high-risk speculative financial trades.', sadeSatiHi: 'साढ़े साती का मुख्य चरण। सोच-समझकर निर्णय लें।', careerEn: 'Technology, aviation, scientific research, and humanitarian work.', careerHi: 'तकनीक, विमानन, विज्ञान व सामाजिक कार्य।' },
+      Meen: { lordEn: 'Jupiter (गुरु)', lordHi: 'बृहस्पति (गुरु)', stoneEn: 'Yellow Sapphire (पुखराज)', colorEn: 'Golden Yellow', num: 3, sadeSatiEn: 'Initial ascending phase (Chadhti) of Sade Sati. Practice meditation.', sadeSatiHi: 'साढ़े साती का प्रथम चरण (चढ़ती)। धैर्य व ध्यान आवश्यक।', careerEn: 'Creative arts, literature, shipping, psychology, and counseling.', careerHi: 'कला, साहित्य, परामर्श, विदेश व्यापार व मनोविज्ञान।' }
+    };
+
+    function handleKey(e) {
+      if (e.key === 'Enter') sendMessage();
+    }
+
+    function askQuick(text) {
+      document.getElementById('userInput').value = text;
+      sendMessage();
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chatBody = document.getElementById('chatBody');
+      chatBody.innerHTML += `<div class="msg msg-user">${text}</div>`;
+      input.value = '';
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      setTimeout(() => {
+        const response = generateResponse(text);
+        chatBody.innerHTML += `<div class="msg msg-astro">${response}</div>`;
+        chatBody.scrollTop = chatBody.scrollHeight;
+      }, 450);
+    }
+
+    function generateResponse(query) {
+      const q = query.toLowerCase();
+      const rKey = document.getElementById('selRashi').value;
+      const r = rashiData[rKey];
+      const year = document.getElementById('inputYear').value || '1998';
+
+      if (currentLang === 'hi') {
+        if (q.includes('job') || q.includes('career') || q.includes('नौकरी') || q.includes('काम') || q.includes('व्यवसाय')) {
+          return `💼 <strong>करियर और नौकरी मार्गदर्शन (${rKey} राशि):</strong><br>आपकी राशि के स्वामी <strong>${r.lordHi}</strong> हैं। आपके लिए अनुकूल क्षेत्र: <em>${r.careerHi}</em><br><br>💡 <strong>उपाय:</strong> महत्वपूर्ण कार्यों में अपने शुभ रंग <strong>${r.colorEn}</strong> का प्रयोग करें और मंगलवार/शनिवार को दान करें।`;
+        }
+        if (q.includes('marriage') || q.includes('विवाह') || q.includes('शादी') || q.includes('love')) {
+          return `💍 <strong>विवाह और दांपत्य योग (${rKey} राशि):</strong><br>आपकी कुंडली अनुसार विवाह संबंधों में सामंजस्य के लिए 18 से अधिक गुण मिलान आवश्यक है।<br><br>🕊️ <strong>उपाय:</strong> गुरुवार को केले के पेड़ अथवा भगवान विष्णु को जल अर्पित करें।`;
+        }
+        if (q.includes('shani') || q.includes('sade sati') || q.includes('शनि') || q.includes('साढ़े साती')) {
+          return `🪐 <strong>शनि साढ़े साती / ढैय्या स्थिति:</strong><br>${r.sadeSatiHi}<br><br>⚡ <strong>सरल उपाय:</strong> प्रत्येक शनिवार को पीपल के नीचे सरसों के तेल का दीपक जलाएं और <em>ॐ शं शनैश्चराय नमः</em> का जाप करें।`;
+        }
+        if (q.includes('gemstone') || q.includes('stone') || q.includes('रत्न') || q.includes('color')) {
+          return `💎 <strong>शुभ रत्न एवं शुभ अंक:</strong><br>• <strong>भाग्यशाली रत्न:</strong> ${r.stoneEn}<br>• <strong>शुभ रंग:</strong> ${r.colorEn}<br>• <strong>शुभ अंक:</strong> ${r.num}<br>• <strong>राशि स्वामी:</strong> ${r.lordHi}`;
+        }
+        return `🕉️️ <strong>वैदिक ज्योतिष मार्गदर्शन:</strong><br>आपकी राशि <strong>${rKey}</strong> (जन्म वर्ष: ~${year}) के स्वामी <strong>${r.lordHi}</strong> हैं।<br>• शुभ अंक: <strong>${r.num}</strong> | शुभ रंग: <strong>${r.colorEn}</strong><br><br>आप मुझसे विशेष रूप से <strong>करियर, विवाह, साढ़े साती या रत्न</strong> के बारे में पूछ सकते हैं!`;
+      } else {
+        if (q.includes('job') || q.includes('career') || q.includes('promotion') || q.includes('business')) {
+          return `💼 <strong>Career & Professional Guidance (${rKey} Sign):</strong><br>Ruled by <strong>${r.lordEn}</strong>, your natural career strengths are: <em>${r.careerEn}</em><br><br>💡 <strong>Advice:</strong> Focus on steady consistency. Align key meetings with daytime auspicious Choghadiya periods.`;
+        }
+        if (q.includes('marriage') || q.includes('wedding') || q.includes('relationship') || q.includes('love')) {
+          return `💍 <strong>Marriage & Relationship Timing:</strong><br>For <strong>${rKey}</strong> natives, planetary alignments suggest prioritizing mental harmony and verified Ashtakoot Guna matching (>18 points) before finalizing marriage.<br><br>🕊️ <strong>Remedy:</strong> Offer water to Surya Dev every morning for relationship clarity.`;
+        }
+        if (q.includes('shani') || q.includes('sade sati') || q.includes('saturn')) {
+          return `🪐 <strong>Shani Sade Sati Status:</strong><br>${r.sadeSatiEn}<br><br>⚡ <strong>Remedy:</strong> Chant Hanuman Chalisa on Tuesdays/Saturdays and practice charitable giving to maintain steady progress.`;
+        }
+        if (q.includes('gemstone') || q.includes('stone') || q.includes('lucky') || q.includes('color')) {
+          return `💎 <strong>Auspicious Gemstone & Lucky Factors:</strong><br>• <strong>Primary Gemstone:</strong> ${r.stoneEn}<br>• <strong>Lucky Color:</strong> ${r.colorEn}<br>• <strong>Lucky Number:</strong> ${r.num}<br>• <strong>Ruling Planet:</strong> ${r.lordEn}`;
+        }
+        return `🕉️ <strong>Vedic Consultation Summary:</strong><br>For <strong>${rKey}</strong> native (Birth Year ~${year}):<br>• <strong>Ruling Lord:</strong> ${r.lordEn}<br>• <strong>Lucky Number:</strong> ${r.num} | <strong>Color:</strong> ${r.colorEn}<br><br>Ask me specifically about <strong>Career, Marriage, Shani Sade Sati, or Gemstones</strong>!`;
+      }
+    }
+
+    function toggleLanguage() {
+      currentLang = (currentLang === 'en') ? 'hi' : 'en';
+
+      if (currentLang === 'hi') {
+        document.getElementById('btnLangText').innerText = 'Switch to English';
+        document.getElementById('txtTitle').innerText = 'OpenAstrologer - 100% फ्री AI ज्योतिषी चैट';
+        document.getElementById('txtSubtitle').innerText = 'नौकरी, विवाह, शनि साढ़े साती, रत्न एवं उपायों के बारे में बिना किसी फीस या फोन नंबर के तुरंत पूछें।';
+        document.getElementById('lblRashi').innerText = 'आपकी राशि (Moon Sign)';
+        document.getElementById('lblBirthYear').innerText = 'जन्म वर्ष (Birth Year)';
+        document.getElementById('txtAstroName').innerText = 'आचार्य OpenAstrologer (ऑनलाइन)';
+        document.getElementById('userInput').placeholder = 'अपना ज्योतिष प्रश्न यहाँ पूछें...';
+        document.getElementById('btnSend').innerText = 'भेजें ➤';
+        document.getElementById('txtZeroStorage').innerText = '100% सुरक्षित (Zero Storage): आपकी कोई भी चैट या जन्म विवरण किसी सर्वर पर नहीं भेजा जाता।';
+        document.getElementById('msgWelcome').innerHTML = '🙏 <strong>नमस्ते!</strong> मैं आपका ओपन वैदिक ज्योतिषी हूँ। बिना किसी फीस या नंबर के अपने <strong>करियर, विवाह, साढ़े साती अथवा रत्न</strong> के बारे में पूछें!';
+      } else {
+        document.getElementById('btnLangText').innerText = 'हिंदी में बदलें (Hindi)';
+        document.getElementById('txtTitle').innerText = 'OpenAstrologer - 100% Free Vedic Astrologer Chat';
+        document.getElementById('txtSubtitle').innerText = 'Ask questions about your career, marriage timing, Shani Sade Sati, gemstones, and remedies without registration, fees, or waiting.';
+        document.getElementById('lblRashi').innerText = 'Your Moon Sign / Rashi (आपकी राशि)';
+        document.getElementById('lblBirthYear').innerText = 'Birth Year (जन्म वर्ष)';
+        document.getElementById('txtAstroName').innerText = 'Acharya OpenAstrologer (Online)';
+        document.getElementById('userInput').placeholder = 'Ask your astrology question...';
+        document.getElementById('btnSend').innerText = 'Send ➤';
+        document.getElementById('txtZeroStorage').innerText = '100% Private & In-Browser: No mobile numbers, chats, or personal queries are ever stored on any server.';
+        document.getElementById('msgWelcome').innerHTML = '🙏 <strong>Namaste!</strong> I am your open Vedic Astrologer. No fees, wallet recharges, or phone numbers needed. Ask me about your <strong>Career, Marriage, Shani Sade Sati, or Gemstones</strong>!';
+      }
+    }
+  </script>
+</body>
+</html>
