@@ -6,6 +6,7 @@
   <title>OpenAstrologer - Real 1-on-1 Vedic Consultations (100% Free)</title>
   <meta name="description" content="Talk directly with compassionate Vedic astrologers for free. Real-time Kundali casting, career, relationship & remedies consultation with zero fees and complete privacy.">
 
+  <!-- Dynamic SVG Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070d18' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M16 5l3 7 7 3-7 3-3 7-3-7-7-3 7-3z' fill='%23f59e0b'/%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%2338bdf8'/%3E%3Ccircle cx='24' cy='8' r='1.5' fill='%2338bdf8'/%3E%3C/svg%3E">
 
   <style>
@@ -134,6 +135,7 @@
       gap: 12px;
       align-items: center;
       transition: all 0.2s ease;
+      position: relative;
     }
     .astro-card:hover {
       border-color: var(--primary);
@@ -141,8 +143,8 @@
     }
     .astro-card.selected {
       border-color: var(--primary);
-      background: rgba(245, 158, 11, 0.1);
-      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+      background: rgba(245, 158, 11, 0.12);
+      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3);
     }
     .astro-avatar-box {
       position: relative;
@@ -263,13 +265,15 @@
     }
     .header-profile { display: flex; align-items: center; gap: 12px; }
     .header-avatar {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       overflow: hidden;
-      border: 1.5px solid var(--primary);
+      border: 2px solid var(--primary);
+      background: #172338;
+      flex-shrink: 0;
     }
-    .header-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .header-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .profile-title strong { font-size: 0.95rem; color: #fff; display: block; }
     .profile-title span { font-size: 0.72rem; color: var(--accent); font-weight: 600; }
     .session-badge {
@@ -501,13 +505,13 @@
       <p id="txtSubtitle">Connect 1-on-1 with genuine, empathetic astrologers. Share your birth details to cast your Kundali, then ask about relationships, career, and inner peace with zero fees or data tracking.</p>
     </header>
 
-    <!-- ROSTER OF 6 AUTHENTIC ASTROLOGERS (4 FEMALE, 2 MALE) -->
+    <!-- ROSTER OF 6 AUTHENTIC ASTROLOGERS -->
     <div class="roster-label" id="lblChooseAstro">Select Astrologer (ज्योतिषी चुनें):</div>
     <div class="astrologer-grid">
-      <!-- 1. Tarot Ananya Sen (Female - Love & Soulmate) -->
+      <!-- 1. Ananya Sen -->
       <div class="astro-card selected" id="cardAstro_ananya" onclick="selectAstrologer('ananya')">
         <div class="astro-avatar-box">
-          <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=891927206910758" alt="Tarot Ananya Sen" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'">
+          <img id="img_ananya" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Ananya Sen" onerror="handleImgFallback(this, 'AS')">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -517,10 +521,10 @@
         <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <!-- 2. Dr. Radhika Sharma (Female - Marriage & Family) -->
+      <!-- 2. Dr. Radhika Sharma -->
       <div class="astro-card" id="cardAstro_radhika" onclick="selectAstrologer('radhika')">
         <div class="astro-avatar-box">
-          <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=61588049433860" alt="Dr. Radhika Sharma" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80'">
+          <img id="img_radhika" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80" alt="Dr. Radhika Sharma" onerror="handleImgFallback(this, 'RS')">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -530,10 +534,10 @@
         <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <!-- 3. Acharya Meenakshi (Female - Career & Finance) -->
+      <!-- 3. Acharya Meenakshi -->
       <div class="astro-card" id="cardAstro_meenakshi" onclick="selectAstrologer('meenakshi')">
         <div class="astro-avatar-box">
-          <img src="https://users-photos.b-cdn.net/245862/media/asset/0120-AJ-6579.jpeg?width=1080" alt="Acharya Meenakshi" onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80'">
+          <img id="img_meenakshi" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80" alt="Acharya Meenakshi" onerror="handleImgFallback(this, 'MS')">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -543,10 +547,10 @@
         <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <!-- 4. Jyotishi Priyadarshini Rao (Female - Remedies & Doshas) -->
+      <!-- 4. Priyadarshini Rao -->
       <div class="astro-card" id="cardAstro_priyadarshini" onclick="selectAstrologer('priyadarshini')">
         <div class="astro-avatar-box">
-          <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=150&q=80" alt="Jyotishi Priyadarshini" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'">
+          <img id="img_priyadarshini" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Priyadarshini Rao" onerror="handleImgFallback(this, 'PR')">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -556,10 +560,10 @@
         <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <!-- 5. Acharya Shastri (Male - Vedic Kundali) -->
+      <!-- 5. Acharya Shastri -->
       <div class="astro-card" id="cardAstro_shastri" onclick="selectAstrologer('shastri')">
         <div class="astro-avatar-box">
-          <img src="https://media.istockphoto.com/id/2206461676/photo/old-priest-with-rudraksha-posing-on-white-background.jpg?s=612x612&w=0&k=20&c=lLbDM3wcqLf1ORlEDjYVlx1vmuns5kIDN9e11yIurug=" alt="Acharya Shastri" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'">
+          <img id="img_shastri" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Acharya Shastri" onerror="handleImgFallback(this, 'AS')">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -569,10 +573,10 @@
         <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <!-- 6. Pandit K.K. Mishra (Male - Shani Sade Sati) -->
+      <!-- 6. Pandit K.K. Mishra -->
       <div class="astro-card" id="cardAstro_mishra" onclick="selectAstrologer('mishra')">
         <div class="astro-avatar-box">
-          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Pandit Mishra" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80'">
+          <img id="img_mishra" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80" alt="Pandit Mishra" onerror="handleImgFallback(this, 'KM')">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -616,8 +620,8 @@
     <div class="chat-box">
       <div class="chat-header">
         <div class="header-profile">
-          <div class="header-avatar">
-            <img id="chatHeaderImg" src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=891927206910758" alt="Astrologer">
+          <div class="header-avatar" id="chatHeaderAvatarContainer">
+            <img id="chatHeaderImg" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Active Astrologer" onerror="handleImgFallback(this, 'AS')">
           </div>
           <div class="profile-title">
             <strong id="txtActiveAstroName">Ananya Sen</strong>
@@ -691,7 +695,6 @@
   <script>
     let currentLang = 'en';
     let currentAstrologer = 'ananya';
-
     let chatState = 'ask_name';
 
     let userProfile = {
@@ -706,10 +709,17 @@
       isChartReady: false
     };
 
+    function handleImgFallback(img, initials) {
+      // SVG dynamic avatar fallback so image never breaks
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#1e293b"/><stop offset="100%" stop-color="#0f172a"/></linearGradient></defs><rect width="100" height="100" fill="url(#g)"/><text x="50" y="58" font-family="system-ui,sans-serif" font-size="34" font-weight="bold" fill="#f59e0b" text-anchor="middle">${initials}</text></svg>`;
+      img.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
     const astrologers = {
       ananya: {
         name: 'Ananya Sen',
-        img: 'https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=891927206910758',
+        img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80',
+        initials: 'AS',
         specEn: 'Love, Soulmates & Relationships Specialist • Online',
         specHi: 'प्रेम, जीवनसाथी व संबंध विशेषज्ञ • ऑनलाइन',
         introEn: '🌸 <strong>Hello dear, welcome.</strong> I am Ananya. Sometimes our hearts carry questions that only the stars can gently illuminate. I am here to listen and guide you without judgment.<br><br>To begin understanding your planetary vibrations, what may I lovingly call you? (Your name)',
@@ -717,7 +727,8 @@
       },
       radhika: {
         name: 'Dr. Radhika Sharma',
-        img: 'https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=61588049433860',
+        img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80',
+        initials: 'RS',
         specEn: 'Marriage Timing & Guna Milan Specialist • Online',
         specHi: 'विवाह योग व गुण मिलान विशेषज्ञ • ऑनलाइन',
         introEn: '🙏 <strong>Namaste, bless you.</strong> I am Dr. Radhika Sharma. In Vedic wisdom, timing is everything—especially when it comes to marriage, family harmony, and peaceful unions.<br><br>Before I cast your birth chart, may I know your <strong>Full Name</strong>?',
@@ -725,7 +736,8 @@
       },
       meenakshi: {
         name: 'Acharya Meenakshi',
-        img: 'https://users-photos.b-cdn.net/245862/media/asset/0120-AJ-6579.jpeg?width=1080',
+        img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80',
+        initials: 'MS',
         specEn: 'Career, Govt Jobs & Business Specialist • Online',
         specHi: 'करियर, सरकारी नौकरी व व्यापार विशेषज्ञ • ऑनलाइन',
         introEn: '✨ <strong>Pranam, welcome.</strong> I am Acharya Meenakshi. Your 10th house of karma reflects your true potential and success. Do not worry about hurdles; the planets always provide a pathway forward.<br><br>To map your career houses, what is your <strong>Full Name</strong>?',
@@ -733,7 +745,8 @@
       },
       priyadarshini: {
         name: 'Priyadarshini Rao',
-        img: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=150&q=80',
+        img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+        initials: 'PR',
         specEn: 'Doshas, Gemstones & Peace Specialist • Online',
         specHi: 'दोष निवारण, रत्न व मानसिक शांति विशेषज्ञ • ऑनलाइन',
         introEn: '🌿 <strong>Warm greetings.</strong> I am Priyadarshini Rao. Every soul goes through turbulent transits, but with gentle Vedic remedies, positive gemstones, and right mantras, balance always returns.<br><br>Could you please share your <strong>Name</strong> so we can connect?',
@@ -741,7 +754,8 @@
       },
       shastri: {
         name: 'Acharya Shastri',
-        img: 'https://media.istockphoto.com/id/2206461676/photo/old-priest-with-rudraksha-posing-on-white-background.jpg?s=612x612&w=0&k=20&c=lLbDM3wcqLf1ORlEDjYVlx1vmuns5kIDN9e11yIurug=',
+        img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+        initials: 'AS',
         specEn: 'Vedic Horoscope & Kundali Specialist • Online',
         specHi: 'वैदिक ज्योतिष व कुंडली विशेषज्ञ • ऑनलाइन',
         introEn: '🔱 <strong>Pranam!</strong> I am Acharya Shastri. Decades of observing planetary degrees have shown me that destiny unfolds best with clarity. Let us map your birth matrix.<br><br>Please share your <strong>Full Name</strong> to begin.',
@@ -749,7 +763,8 @@
       },
       mishra: {
         name: 'Pandit K.K. Mishra',
-        img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+        img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+        initials: 'KM',
         specEn: 'Shani Sade Sati & Navagraha Specialist • Online',
         specHi: 'शनि साढ़े साती व नवग्रह शांति विशेषज्ञ • ऑनलाइन',
         introEn: '🕉️ <strong>Jai Shri Ram.</strong> I am Pandit K.K. Mishra. Saturn is not a punisher; he is a teacher who shapes our strength. Tell me what brings you here today after we calculate your birth chart.<br><br>First, what is your <strong>Full Name</strong>?',
@@ -774,7 +789,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       startSessionTimer();
-      renderInitialGreeting();
+      selectAstrologer('ananya');
     });
 
     function renderInitialGreeting() {
@@ -794,12 +809,19 @@
 
     function selectAstrologer(key) {
       currentAstrologer = key;
-      document.querySelectorAll('.astro-card').forEach(c => c.classList.remove('selected'));
+
+      // Update Card Styling
+      document.querySelectorAll('.astrologer-grid .astro-card').forEach(c => c.classList.remove('selected'));
       const activeCard = document.getElementById(`cardAstro_${key}`);
       if (activeCard) activeCard.classList.add('selected');
 
       const astro = astrologers[key];
-      document.getElementById('chatHeaderImg').src = astro.img;
+
+      // Instant, guaranteed photo update in Chat Header
+      const headerImg = document.getElementById('chatHeaderImg');
+      headerImg.src = astro.img;
+      headerImg.onerror = () => handleImgFallback(headerImg, astro.initials);
+
       document.getElementById('txtActiveAstroName').innerText = astro.name;
       document.getElementById('txtActiveAstroSpec').innerText = (currentLang === 'en') ? astro.specEn : astro.specHi;
 
