@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>OpenAstrologer - Real-Life 1-on-1 Vedic Astrologer Chat</title>
-  <meta name="description" content="100% Free real-time interactive Vedic astrologer chat. Realistic birth detail collection, Kundali casting, career, marriage and remedies guidance. 100% private.">
+  <meta name="description" content="100% Free real-time interactive Vedic astrologer chat. Conversational birth detail collection, instant Kundali casting, career, marriage and remedies guidance. 100% private.">
 
   <!-- Dynamic SVG Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M16 5l3 7 7 3-7 3-3 7-3-7-7-3 7-3z' fill='%23f59e0b'/%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%2338bdf8'/%3E%3Ccircle cx='24' cy='8' r='1.5' fill='%2338bdf8'/%3E%3C/svg%3E">
@@ -48,7 +48,7 @@
     }
     .container {
       width: 100%;
-      max-width: 980px;
+      max-width: 960px;
       margin: 0 auto;
       padding: 1.25rem 1rem 3.5rem 1rem;
     }
@@ -183,7 +183,7 @@
       text-transform: uppercase;
     }
 
-    /* KUNDALI SHEET (Initially Hidden, Reveals on details filled) */
+    /* KUNDALI STATUS DRAWER */
     .kundali-drawer {
       background: var(--card);
       border: 1.5px solid var(--border);
@@ -244,7 +244,7 @@
     .chat-box {
       display: flex;
       flex-direction: column;
-      height: 520px;
+      height: 540px;
       background: var(--card-inner);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
@@ -301,49 +301,28 @@
       border-bottom-right-radius: 2px;
     }
 
-    /* IN-CHAT FORM FOR REALISTIC ONBOARDING */
-    .chat-form-card {
-      background: #09101d;
-      border: 1.5px solid #273750;
-      border-radius: 10px;
-      padding: 12px;
-      margin-top: 8px;
-    }
-    .chat-form-card .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* IN-CHAT INTERACTIVE ACTION BUBBLES */
+    .in-chat-actions {
+      display: flex;
+      flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-top: 10px;
     }
-    @media (max-width: 480px) {
-      .chat-form-card .form-row { grid-template-columns: 1fr; }
-    }
-    .chat-form-card input, .chat-form-card select {
-      width: 100%;
-      padding: 8px 10px;
-      background: #0f1828;
-      border: 1px solid #1e293b;
-      border-radius: 6px;
+    .action-btn {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--primary);
       color: #fff;
-      font-size: 0.85rem;
-      outline: none;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
-    .chat-form-card input:focus, .chat-form-card select:focus {
-      border-color: var(--primary);
-    }
-    .submit-details-btn {
-      width: 100%;
-      padding: 9px;
+    .action-btn:hover {
       background: var(--primary);
       color: #0b1120;
-      border: none;
-      border-radius: 6px;
-      font-weight: 800;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: background-color 0.15s ease;
     }
-    .submit-details-btn:hover { background: var(--primary-hover); }
 
     /* Typing indicator */
     .typing-box {
@@ -511,7 +490,7 @@
       </div>
 
       <h1 id="txtTitle">Talk to Expert Vedic Astrologers for Free</h1>
-      <p id="txtSubtitle">Real-time consultation with Vedic pandits. Share your birth details to generate your Kundali chart, then ask about career, marriage, and remedies with zero charges.</p>
+      <p id="txtSubtitle">An authentic 1-on-1 Vedic consultation. Share your details naturally with the astrologer to cast your Kundali, then ask about career, marriage, and remedies with zero fees.</p>
     </header>
 
     <!-- ROSTER OF ASTROLOGERS -->
@@ -519,7 +498,7 @@
     <div class="astrologer-grid">
       <div class="astro-card selected" id="cardAstro1" onclick="selectAstrologer('shastri')">
         <div class="astro-avatar-box">
-          🧙‍♂️️
+          🧙‍♂️
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
@@ -579,7 +558,7 @@
           <strong id="mLagna" style="color:#64748b;">Not Cast Yet</strong>
         </div>
         <div class="m-pill">
-          <span>Nakshatra (नक्षत्र)</span>
+          <span>Birth Nakshatra</span>
           <strong id="mNakshatra" style="color:#64748b;">Not Cast Yet</strong>
         </div>
         <div class="m-pill">
@@ -603,41 +582,9 @@
       </div>
 
       <div class="chat-body" id="chatBody">
-        <!-- Message 1 from Astrologer requesting birth details -->
-        <div class="msg msg-astro" id="msgWelcome">
-          🙏 <strong>Pranam!</strong> I am Acharya Shastri. To provide accurate Vedic predictions, I first need your birth chart details. Please enter your name, date of birth, and place below so I can cast your Kundali.
+        <div class="msg msg-astro" id="msgFirst">
+          <!-- Populated by JS -->
         </div>
-
-        <!-- Embedded Interactive Birth Detail Form -->
-        <div class="chat-form-card" id="chatBirthForm">
-          <div style="font-size:0.8rem; font-weight:700; color:var(--primary); margin-bottom:8px;">
-            📝 Enter Birth Details (जन्म विवरण दर्ज करें):
-          </div>
-          <div class="form-row">
-            <input type="text" id="inName" placeholder="Your Name (उदा. राहुल)">
-            <select id="inRashi">
-              <option value="" disabled selected>Select Moon Sign / Rashi</option>
-              <option value="Mesh">Aries (मेष)</option>
-              <option value="Vrishabha">Taurus (वृषभ)</option>
-              <option value="Mithun">Gemini (मिथुन)</option>
-              <option value="Kark">Cancer (कर्क)</option>
-              <option value="Simha">Leo (सिंह)</option>
-              <option value="Kanya">Virgo (कन्या)</option>
-              <option value="Tula">Libra (तुला)</option>
-              <option value="Vrishchik">Scorpio (वृश्चिक)</option>
-              <option value="Dhanu">Sagittarius (धनु)</option>
-              <option value="Makar">Capricorn (मकर)</option>
-              <option value="Kumbh">Aquarius (कुंभ)</option>
-              <option value="Meen">Pisces (मीन)</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <input type="date" id="inDob" value="1998-07-15">
-            <input type="text" id="inCity" placeholder="Birth City (उदा. गोरखपुर / दिल्ली)">
-          </div>
-          <button class="submit-details-btn" onclick="submitBirthDetails()">✨ Cast Kundali & Begin Chat (कुंडली बनाएं)</button>
-        </div>
-
         <div class="typing-box" id="typingIndicator">
           <span class="t-dot"></span>
           <span class="t-dot"></span>
@@ -645,17 +592,17 @@
         </div>
       </div>
 
-      <!-- QUICK PROMPT CHIPS (Disabled until details entered) -->
-      <div class="quick-chips-bar" id="chipsBar" style="opacity:0.6; pointer-events:none;">
-        <span class="chip" onclick="askQuick('When will I get a good job or career growth?')">💼 Job & Career</span>
+      <!-- QUICK PROMPT CHIPS (Active only after Kundali is cast) -->
+      <div class="quick-chips-bar" id="chipsBar" style="opacity:0.5; pointer-events:none;">
+        <span class="chip" onclick="askQuick('When will I get a good job or career promotion?')">💼 Job & Career</span>
         <span class="chip" onclick="askQuick('When is my marriage yoga forming?')">💍 Marriage Timing</span>
-        <span class="chip" onclick="askQuick('Am I under Shani Sade Sati or Dhaiya right now?')">🪐 Shani Sade Sati</span>
+        <span class="chip" onclick="askQuick('Am I affected by Shani Sade Sati or Dhaiya right now?')">🪐 Shani Sade Sati</span>
         <span class="chip" onclick="askQuick('Which gemstone and lucky color suit my chart?')">💎 Lucky Gemstone</span>
         <span class="chip" onclick="askQuick('What Vedic remedy can remove hurdles in my work?')">📿 Obstacle Remedy</span>
       </div>
 
       <div class="chat-footer">
-        <input type="text" id="userInput" placeholder="First fill in your birth details above..." onkeypress="handleKey(event)">
+        <input type="text" id="userInput" placeholder="Type your answer here..." onkeypress="handleKey(event)">
         <button class="send-btn" onclick="sendMessage()" id="btnSend">Send ➤</button>
       </div>
     </div>
@@ -698,12 +645,21 @@
   <script>
     let currentLang = 'en';
     let currentAstrologer = 'shastri';
-    let userDetails = {
+
+    // ONBOARDING CONVERSATIONAL STATE MACHINE:
+    // 'ask_name' -> 'ask_gender' -> 'ask_dob' -> 'ask_tob' -> 'ask_place' -> 'ready'
+    let chatState = 'ask_name';
+
+    let userProfile = {
       name: '',
+      gender: '',
+      dob: null,    // Date object
+      tob: '12:00', // Approximate time
+      place: '',
       rashi: '',
-      dob: '',
-      city: '',
-      isSubmitted: false
+      lagna: '',
+      nakshatra: '',
+      isChartReady: false
     };
 
     const astrologers = {
@@ -712,27 +668,28 @@
         icon: '🧙‍♂️',
         specEn: 'Career, Business & Kundali Specialist • Live',
         specHi: 'करियर, व्यापार व कुंडली विशेषज्ञ • लाइव',
-        greetEn: '🙏 <strong>Pranam!</strong> I am Acharya Shastri. To give you accurate Vedic predictions, I first need your birth details. Please fill in your name and birth data below so I can calculate your Kundali chart.',
-        greetHi: '🙏 <strong>प्रणाम!</strong> मैं आचार्य शास्त्री हूँ। आपकी सटीक वैदिक गणना के लिए मुझे आपकी जन्म कुंडली बनानी होगी। कृपया नीचे अपना नाम व जन्म विवरण भरें।'
+        introEn: '🙏 <strong>Pranam!</strong> I am Acharya Shastri. Before I can look into your planetary houses and forecast your future, I must cast your Vedic Kundali.<br><br>First, may I know your <strong>Full Name</strong>?',
+        introHi: '🙏 <strong>प्रणाम!</strong> मैं आचार्य शास्त्री हूँ। आपके भविष्य और ग्रह गोचर का सटीक अध्ययन करने के लिए मुझे पहले आपकी वैदिक जन्म कुंडली बनानी होगी।<br><br>सबसे पहले, कृपया अपना <strong>शुभ नाम</strong> बताएं?'
       },
       radhika: {
         name: 'Dr. Radhika Sharma',
         icon: '🧕',
         specEn: 'Marriage, Compatibility & Love Specialist • Live',
         specHi: 'विवाह, गुण मिलान व संबंध विशेषज्ञ • लाइव',
-        greetEn: '🌸 <strong>Namaste!</strong> I am Dr. Radhika Sharma. Before examining marriage timing or compatibility, I must cast your lagna chart. Please enter your birth details below.',
-        greetHi: '🌸 <strong>नमस्ते!</strong> मैं डॉ. राधिका शर्मा हूँ। विवाह योग और दांपत्य विश्लेषण के लिए मुझे आपकी जन्म कुंडली चाहिए। कृपया नीचे अपना विवरण दर्ज करें।'
+        introEn: '🌸 <strong>Namaste!</strong> I am Dr. Radhika Sharma. To examine your 7th house of marriage and relationship yogas, I require your birth coordinates.<br><br>To begin, what is your <strong>Full Name</strong>?',
+        introHi: '🌸 <strong>नमस्ते!</strong> मैं डॉ. राधिका शर्मा हूँ। आपके दांपत्य सुख व विवाह योग के विश्लेषण के लिए मुझे आपकी जन्म कुंडली तैयार करनी होगी।<br><br>शुरुआत के लिए, आपका <strong>शुभ नाम</strong> क्या है?'
       },
       mishra: {
         name: 'Pandit K.K. Mishra',
         icon: '🕉️',
         specEn: 'Sade Sati, Remedies & Gemstones Specialist • Live',
         specHi: 'साढ़े साती, वैदिक उपाय व रत्न विशेषज्ञ • लाइव',
-        greetEn: '🔱 <strong>Jai Shri Ram!</strong> I am Pandit K.K. Mishra. To evaluate Shani transit or recommend the right gemstones, enter your birth details below.',
-        greetHi: '🔱 <strong>जय श्री राम!</strong> मैं पंडित के.के. मिश्रा हूँ। शनि की साढ़े साती और रत्न की सही जांच के लिए कृपया अपना जन्म विवरण नीचे दर्ज करें।'
+        introEn: '🔱 <strong>Jai Shri Ram!</strong> I am Pandit K.K. Mishra. To inspect your Saturn (Shani) transits, doshas, and suitable gemstones, I need your natal chart.<br><br>Please tell me your <strong>Full Name</strong> first.',
+        introHi: '🔱 <strong>जय श्री राम!</strong> मैं पंडित के.के. मिश्रा हूँ। शनि साढ़े साती, कालसर्प शांति व भाग्यशाली रत्नों की सटीक जांच के लिए कुंडली आवश्यक है।<br><br>सर्वप्रथम अपना <strong>पूरा नाम</strong> बताएं।'
       }
     };
 
+    // Authentic Vedic Rashi Data
     const rashiData = {
       Mesh: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Red / Saffron', num: 9, nakshatra: 'Ashwini / Bharani', lagna: 'Mesha (मेष)', sadeSatiEn: 'No active Sade Sati. Strong Martian drive.', sadeSatiHi: 'साढ़े साती नहीं है। मंगल का प्रभाव मजबूत है।', careerEn: 'Technical execution, defense, civil engineering, and leadership roles excel.', careerHi: 'इंजीनियरिंग, पुलिस/सेना, रियल एस्टेट व तकनीकी क्षेत्रों में सफलता।' },
       Vrishabha: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Opal / Diamond (ओपल / हीरा)', colorEn: 'White / Cream', num: 6, nakshatra: 'Krittika / Rohini', lagna: 'Vrishabha (वृषभ)', sadeSatiEn: 'Free of Sade Sati. Jupiter aspect brings steady expansion.', sadeSatiHi: 'साढ़े साती से मुक्त। गुरु के प्रभाव से आर्थिक स्थिरता।', careerEn: 'Finance, banking, luxury design, catering, and architecture prosper.', careerHi: 'बैंकिंग, वित्त, फैशन, कला व खाद्य व्यवसाय में लाभ।' },
@@ -750,7 +707,13 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       startSessionTimer();
+      renderInitialGreeting();
     });
+
+    function renderInitialGreeting() {
+      const astro = astrologers[currentAstrologer];
+      document.getElementById('msgFirst').innerHTML = (currentLang === 'en') ? astro.introEn : astro.introHi;
+    }
 
     function startSessionTimer() {
       let seconds = 0;
@@ -774,66 +737,9 @@
       document.getElementById('txtActiveAstroName').innerText = astro.name;
       document.getElementById('txtActiveAstroSpec').innerText = (currentLang === 'en') ? astro.specEn : astro.specHi;
 
-      // Update welcome message if chart not yet cast
-      if (!userDetails.isSubmitted) {
-        document.getElementById('msgWelcome').innerHTML = (currentLang === 'en') ? astro.greetEn : astro.greetHi;
+      if (!userProfile.isChartReady && chatState === 'ask_name') {
+        renderInitialGreeting();
       }
-    }
-
-    // SUBMIT BIRTH DETAILS FROM CHAT
-    function submitBirthDetails() {
-      const name = document.getElementById('inName').value.trim();
-      const rashi = document.getElementById('inRashi').value;
-      const dob = document.getElementById('inDob').value;
-      const city = document.getElementById('inCity').value.trim();
-
-      if (!name || !rashi) {
-        alert(currentLang === 'en' ? 'Please enter your Name and select your Rashi.' : 'कृपया अपना नाम भरें और राशि चुनें।');
-        return;
-      }
-
-      userDetails = { name, rashi, dob, city, isSubmitted: true };
-
-      // Update the Kundali Drawer on top
-      const drawer = document.getElementById('kundaliDrawer');
-      drawer.classList.remove('locked');
-
-      const data = rashiData[rashi];
-      document.getElementById('badgeChartStatus').className = 'status-badge status-casted';
-      document.getElementById('badgeChartStatus').innerText = currentLang === 'en' ? '✅ Chart Cast Successfully' : '✅ कुण्डली बन गई';
-
-      document.getElementById('mMoon').innerText = rashi;
-      document.getElementById('mMoon').style.color = '#fff';
-
-      document.getElementById('mLagna').innerText = data.lagna;
-      document.getElementById('mLagna').style.color = '#38bdf8';
-
-      document.getElementById('mNakshatra').innerText = data.nakshatra;
-      document.getElementById('mNakshatra').style.color = '#fff';
-
-      document.getElementById('mLord').innerText = (currentLang === 'en') ? data.lordEn : data.lordHi;
-      document.getElementById('mLord').style.color = 'var(--primary)';
-
-      // Hide the form inside the chat
-      document.getElementById('chatBirthForm').style.display = 'none';
-
-      // Enable quick prompt chips and input box
-      document.getElementById('chipsBar').style.opacity = '1';
-      document.getElementById('chipsBar').style.pointerEvents = 'auto';
-      document.getElementById('userInput').placeholder = (currentLang === 'en')
-        ? `Ask ${astrologers[currentAstrologer].name} about your career, marriage, or remedies...`
-        : `${astrologers[currentAstrologer].name} से अपना प्रश्न पूछें...`;
-
-      // Astrologer confirms receipt in chat
-      const chatBody = document.getElementById('chatBody');
-      const typing = document.getElementById('typingIndicator');
-
-      const confirmationMsg = (currentLang === 'en')
-        ? `🙏 <strong>Ayushman Bhava, ${name}!</strong> I have calculated your natal chart based on your Moon in <strong>${rashi}</strong> (Ascendant: <em>${data.lagna}</em>, Lord: <em>${data.lordEn}</em>). Your chart is now active.<br><br>What would you like to ask me about your <strong>Job & Career, Marriage Timing, or Shani Sade Sati</strong>?`
-        : `🙏 <strong>आयुष्मान भव, ${name} जी!</strong> मैंने आपकी <strong>${rashi}</strong> राशि (लग्न: <em>${data.lagna}</em>, स्वामी: <em>${data.lordHi}</em>) के आधार पर आपकी कुंडली बना ली है।<br><br>अब आप मुझसे अपने <strong>करियर, विवाह योग अथवा साढ़े साती</strong> के बारे में जो चाहें पूछ सकते हैं।`;
-
-      chatBody.insertBefore(createMsgElement(confirmationMsg, 'msg-astro'), typing);
-      chatBody.scrollTop = chatBody.scrollHeight;
     }
 
     function handleKey(e) {
@@ -841,31 +747,54 @@
     }
 
     function askQuick(text) {
-      if (!userDetails.isSubmitted) {
-        alert(currentLang === 'en' ? 'Please fill in your birth details above first.' : 'कृपया पहले ऊपर अपना जन्म विवरण भरें।');
-        return;
-      }
+      if (!userProfile.isChartReady) return;
       document.getElementById('userInput').value = text;
       sendMessage();
     }
 
-    // CHECK FOR GIBBERISH / RANDOM KEYBOARD SMASHING
+    function chooseAction(val) {
+      document.getElementById('userInput').value = val;
+      sendMessage();
+    }
+
+    // GIBBERISH / KEYBOARD MASHING DETECTOR
     function isGibberish(text) {
       const clean = text.trim().toLowerCase();
       if (clean.length < 2) return true;
+      if (/^(.)\1+$/.test(clean)) return true; // e.g. "aaaaa"
 
-      // Repeated single characters like "aaaaaa" or "zzzzz"
-      if (/^(.)\1+$/.test(clean)) return true;
-
-      // Lack of any vowels in words longer than 4 chars (e.g., "ekljshfk", "asdfghjk", "qwrtyp")
       const words = clean.split(/\s+/);
       for (const w of words) {
-        if (w.length >= 5 && !/[aeiouy]/.test(w)) return true;
-        // Weird consonant clustering like "lkjshf"
-        if (/[bcdfghjklmnpqrstvwxyz]{6,}/i.test(w)) return true;
+        if (w.length >= 5 && !/[aeiouy]/.test(w)) return true; // no vowels in long word
+        if (/[bcdfghjklmnpqrstvwxyz]{6,}/i.test(w)) return true; // 6 consonants in a row
       }
-
       return false;
+    }
+
+    // CALCULATE MOON SIGN (RASHI) & LAGNA MATHEMATICALLY FROM DOB & TOB
+    function computeKundali(d, m, y, tobStr) {
+      // Approximate Vedic Sidereal Moon Sign based on Julian Day Number
+      const jd = Math.floor((1461 * (y + 4800 + Math.floor((m - 14) / 12))) / 4) +
+                 Math.floor((367 * (m - 2 - 12 * Math.floor((m - 14) / 12))) / 12) -
+                 Math.floor((3 * Math.floor((y + 4900 + Math.floor((m - 14) / 12)) / 100)) / 4) +
+                 d - 32075;
+
+      const rashiKeys = ['Mesh', 'Vrishabha', 'Mithun', 'Kark', 'Simha', 'Kanya', 'Tula', 'Vrishchik', 'Dhanu', 'Makar', 'Kumbh', 'Meen'];
+      
+      // Sidereal moon transit approximation: ~2.25 days per rashi
+      const moonRashiIdx = Math.floor(Math.abs(jd + 4) / 2.25) % 12;
+      const moonRashi = rashiKeys[moonRashiIdx];
+
+      // Ascendant (Lagna) changes roughly every 2 hours
+      let [hh, mm] = tobStr.split(':').map(Number);
+      if (isNaN(hh)) hh = 12;
+      const lagnaOffset = Math.floor((hh + (m * 2)) / 2) % 12;
+      const lagnaRashi = rashiKeys[lagnaOffset];
+
+      return {
+        rashi: moonRashi,
+        lagna: lagnaRashi
+      };
     }
 
     function sendMessage() {
@@ -886,10 +815,10 @@
 
       setTimeout(() => {
         typing.style.display = 'none';
-        const response = generateRealisticResponse(text);
+        const response = processChatMessage(text);
         chatBody.insertBefore(createMsgElement(response, 'msg-astro'), typing);
         chatBody.scrollTop = chatBody.scrollHeight;
-      }, 750);
+      }, 700);
     }
 
     function createMsgElement(html, className) {
@@ -899,65 +828,196 @@
       return div;
     }
 
-    function generateRealisticResponse(query) {
+    // REAL-LIFE CONVERSATIONAL LOGIC
+    function processChatMessage(userMsg) {
       const astro = astrologers[currentAstrologer];
 
-      // 1. Guardrail: User hasn't filled details yet
-      if (!userDetails.isSubmitted) {
+      // GIBBERISH CHECK
+      if (isGibberish(userMsg)) {
         if (currentLang === 'hi') {
-          return `कृपया पहले ऊपर दिए गए फॉर्म में अपना <strong>नाम और राशि</strong> दर्ज करें। बिना जन्म विवरण के कोई भी प्रामाणिक ज्योतिषी भविष्यवाणी नहीं कर सकता।`;
+          return `क्षमा करें, मुझे यह समझ नहीं आया। कृपया स्पष्ट शब्दों में अपना उत्तर लिखें।`;
         }
-        return `Please fill in your <strong>Name and Moon Sign (Rashi)</strong> in the form above first. Authentic Vedic astrology requires your birth chart before answering.`;
+        return `I couldn't quite understand that. Could you please reply clearly in plain words?`;
       }
 
-      // 2. Guardrail: Gibberish or keyboard mashing detection (e.g. "ekljshfk")
-      if (isGibberish(query)) {
+      // STEP 1: ASKING NAME
+      if (chatState === 'ask_name') {
+        userProfile.name = userMsg.replace(/(my name is|i am|mera naam|naam)/gi, '').trim();
+        chatState = 'ask_gender';
+
         if (currentLang === 'hi') {
-          return `क्षमा करें, मुझे आपका प्रश्न समझ नहीं आया। क्या आप अपना प्रश्न (जैसे: <em>मेरी नौकरी कब लगेगी?</em> या <em>विवाह का समय क्या है?</em>) स्पष्ट शब्दों में लिख सकते हैं?`;
+          return `प्रसन्नता हुई <strong>${userProfile.name} जी</strong>।<br><br>सटीक कुंडली विश्लेषण के लिए कृपया अपना <strong>जेंडर (Gender)</strong> बताएं:
+            <div class="in-chat-actions">
+              <button class="action-btn" onclick="chooseAction('पुरुष (Male)')">पुरुष (Male)</button>
+              <button class="action-btn" onclick="chooseAction('महिला (Female)')">महिला (Female)</button>
+              <button class="action-btn" onclick="chooseAction('अन्य (Other)')">अन्य (Other)</button>
+            </div>`;
         }
-        return `I couldn't understand that message. Could you please rephrase your question clearly (for example: <em>"When will I get a promotion?"</em> or <em>"What is my lucky gemstone?"</em>)?`;
+        return `Pleasure to meet you, <strong>${userProfile.name}</strong>.<br><br>To calculate appropriate marriage and planetary houses, could you tell me your <strong>Gender</strong>?
+          <div class="in-chat-actions">
+            <button class="action-btn" onclick="chooseAction('Male')">Male</button>
+            <button class="action-btn" onclick="chooseAction('Female')">Female</button>
+            <button class="action-btn" onclick="chooseAction('Other')">Other</button>
+          </div>`;
       }
 
-      const q = query.toLowerCase();
-      const rKey = userDetails.rashi;
+      // STEP 2: ASKING GENDER
+      if (chatState === 'ask_gender') {
+        userProfile.gender = userMsg.trim();
+        chatState = 'ask_dob';
+
+        if (currentLang === 'hi') {
+          return `धन्यवाद। अब कृपया अपनी <strong>जन्म तिथि (Date of Birth)</strong> बताएं?<br><small style="color:var(--muted);">(उदा: 15 July 1998 या 15/07/1998)</small>`;
+        }
+        return `Understood. Next, what is your <strong>Date of Birth (DOB)</strong>?<br><small style="color:var(--muted);">(For example: 15 July 1998 or 15/07/1998)</small>`;
+      }
+
+      // STEP 3: ASKING DOB
+      if (chatState === 'ask_dob') {
+        // Simple regex parser for DOB
+        const dMatch = userMsg.match(/(\d{1,2})[\/\-\.\s]+(\d{1,2}|[a-zA-Z]{3,9})[\/\-\.\s]+(\d{4})/);
+        if (!dMatch && !/\d{4}/.test(userMsg)) {
+          if (currentLang === 'hi') {
+            return `कृपया अपनी जन्म तारीख वर्ष सहित लिखें (जैसे: <em>15 August 1998</em> या <em>15/08/1998</em>), ताकि सही ग्रह दशा ज्ञात हो सके।`;
+          }
+          return `Please provide your birth date including the birth year (for example: <em>15 August 1998</em> or <em>15/08/1998</em>) so I can map your planetary degrees.`;
+        }
+
+        // Store DOB representation
+        userProfile.rawDob = userMsg.trim();
+        chatState = 'ask_tob';
+
+        if (currentLang === 'hi') {
+          return `बहुत अच्छा। क्या आपको अपना <strong>जन्म समय (Time of Birth)</strong> ज्ञात है?<br><small style="color:var(--muted);">यदि सटीक समय ज्ञात न हो, तो अनुमानित समय (सुबह, दोपहर, या शाम) बताएं:</small>
+            <div class="in-chat-actions">
+              <button class="action-btn" onclick="chooseAction('सुबह (Morning 08:00 AM)')">सुबह (Morning)</button>
+              <button class="action-btn" onclick="chooseAction('दोपहर (Afternoon 12:30 PM)')">दोपहर (Afternoon)</button>
+              <button class="action-btn" onclick="chooseAction('शाम (Evening 06:00 PM)')">शाम (Evening)</button>
+              <button class="action-btn" onclick="chooseAction('रात (Night 10:00 PM)')">रात (Night)</button>
+            </div>`;
+        }
+        return `Got it. What was your approximate <strong>Time of Birth (TOB)</strong>?<br><small style="color:var(--muted);">If you don't know the exact minute, an estimate is fine:</small>
+          <div class="in-chat-actions">
+            <button class="action-btn" onclick="chooseAction('Morning (08:00 AM)')">Morning</button>
+            <button class="action-btn" onclick="chooseAction('Afternoon (12:30 PM)')">Afternoon</button>
+            <button class="action-btn" onclick="chooseAction('Evening (06:00 PM)')">Evening</button>
+            <button class="action-btn" onclick="chooseAction('Night (10:00 PM)')">Night</button>
+          </div>`;
+      }
+
+      // STEP 4: ASKING TOB
+      if (chatState === 'ask_tob') {
+        userProfile.tob = userMsg.trim();
+        chatState = 'ask_place';
+
+        if (currentLang === 'hi') {
+          return `अंतिम विवरण: आपका <strong>जन्म स्थान (Birth City / State)</strong> क्या है?<br><small style="color:var(--muted);">(उदा: गोरखपुर, वाराणसी, पटना, दिल्ली, आदि)</small>`;
+        }
+        return `One final detail: In which <strong>City / Place</strong> were you born?<br><small style="color:var(--muted);">(For example: Gorakhpur, Patna, Delhi, Mumbai)</small>`;
+      }
+
+      // STEP 5: ASKING PLACE -> CAST KUNDALI CHART!
+      if (chatState === 'ask_place') {
+        userProfile.place = userMsg.trim();
+        chatState = 'ready';
+        userProfile.isChartReady = true;
+
+        // Perform Astrological Ephemeris Calculation
+        // Extract numbers or fallback
+        const nums = (userProfile.rawDob.match(/\d+/g) || [15, 7, 1998]).map(Number);
+        const day = nums[0] > 31 ? 15 : nums[0];
+        const month = nums[1] > 12 ? 7 : (nums[1] || 7);
+        const year = nums[2] || 1998;
+
+        const calculated = computeKundali(day, month, year, userProfile.tob);
+        userProfile.rashi = calculated.rashi;
+        userProfile.lagna = calculated.lagna;
+
+        const rInfo = rashiData[userProfile.rashi];
+
+        // Unlock the top Kundali Drawer
+        const drawer = document.getElementById('kundaliDrawer');
+        drawer.classList.remove('locked');
+
+        document.getElementById('badgeChartStatus').className = 'status-badge status-casted';
+        document.getElementById('badgeChartStatus').innerText = (currentLang === 'en') ? '✅ Kundali Cast Successfully' : '✅ कुण्डली बन गई';
+
+        document.getElementById('mMoon').innerText = userProfile.rashi;
+        document.getElementById('mMoon').style.color = '#fff';
+
+        document.getElementById('mLagna').innerText = rInfo.lagna;
+        document.getElementById('mLagna').style.color = '#38bdf8';
+
+        document.getElementById('mNakshatra').innerText = rInfo.nakshatra;
+        document.getElementById('mNakshatra').style.color = '#fff';
+
+        document.getElementById('mLord').innerText = (currentLang === 'en') ? rInfo.lordEn : rInfo.lordHi;
+        document.getElementById('mLord').style.color = 'var(--primary)';
+
+        // Enable quick prompt chips
+        document.getElementById('chipsBar').style.opacity = '1';
+        document.getElementById('chipsBar').style.pointerEvents = 'auto';
+        document.getElementById('userInput').placeholder = (currentLang === 'en')
+          ? `Ask ${astro.name} about your career, marriage, or remedies...`
+          : `${astro.name} से अपना प्रश्न पूछें...`;
+
+        if (currentLang === 'hi') {
+          return `✨ <strong>आपकी वैदिक जन्म कुण्डली तैयार है, ${userProfile.name} जी!</strong><br><br>
+          • <strong>चन्द्र राशि (Moon Sign):</strong> ${userProfile.rashi}<br>
+          • <strong>लग्न (Ascendant):</strong> ${rInfo.lagna}<br>
+          • <strong>जन्म नक्षत्र:</strong> ${rInfo.nakshatra}<br>
+          • <strong>राशि स्वामी:</strong> ${rInfo.lordHi}<br><br>
+          आपकी जन्म कुंडली मेरे सम्मुख सक्रिय हो चुकी है। अब आप मुझसे <strong>करियर/नौकरी, विवाह योग, साढ़े साती, अथवा भाग्यशाली रत्न</strong> के बारे में जो चाहें पूछ सकते हैं!`;
+        }
+
+        return `✨ <strong>Your Natal Kundali is ready, ${userProfile.name}!</strong><br><br>
+        • <strong>Moon Sign (Rashi):</strong> ${userProfile.rashi}<br>
+        • <strong>Ascendant (Lagna):</strong> ${rInfo.lagna}<br>
+        • <strong>Birth Star (Nakshatra):</strong> ${rInfo.nakshatra}<br>
+        • <strong>Ruling Lord:</strong> ${rInfo.lordEn}<br><br>
+        Your chart is active in front of me. What would you like to inquire about today? You can ask about <strong>Job & Promotion, Marriage Timing, Shani Sade Sati, or Gemstones</strong>!`;
+      }
+
+      // STEP 6: KUNDALI IS READY -> ANSWER USER INQUIRIES
+      const q = userMsg.toLowerCase();
+      const rKey = userProfile.rashi;
       const r = rashiData[rKey];
-      const userName = userDetails.name;
+      const name = userProfile.name;
 
-      // 3. Realistic contextual answers
       if (currentLang === 'hi') {
         if (q.includes('job') || q.includes('career') || q.includes('नौकरी') || q.includes('काम') || q.includes('व्यापार') || q.includes('business')) {
-          return `💼 <strong>${astro.name} का विश्लेषण (${userName} जी):</strong><br>आपकी <strong>${rKey}</strong> राशि के स्वामी <strong>${r.lordHi}</strong> हैं। आपकी कुंडली के 10वें भाव में अनुकूल गोचर बन रहा है। आपके लिए श्रेष्ठ क्षेत्र: <em>${r.careerHi}</em><br><br>💡 <strong>उपाय:</strong> महत्वपूर्ण सौदे या परीक्षा दिन के शुभ चौघड़िया में करें और मंगलवार या शनिवार को जरूरतमंदों को भोजन कराएं।`;
+          return `💼 <strong>${astro.name} का करियर विश्लेषण (${name} जी):</strong><br>आपकी <strong>${rKey}</strong> राशि के स्वामी <strong>${r.lordHi}</strong> हैं। आपकी कुंडली के 10वें भाव (कर्म भाव) का लग्न <em>${r.lagna}</em> के साथ शुभ संबंध है। आपके लिए श्रेष्ठ क्षेत्र: <em>${r.careerHi}</em><br><br>💡 <strong>उपाय:</strong> महत्वपूर्ण कार्य हमेशा दिन के शुभ चौघड़िया में करें और नियमित सूर्य को अर्घ्य दें।`;
         }
         if (q.includes('marriage') || q.includes('विवाह') || q.includes('शादी') || q.includes('love') || q.includes('partner') || q.includes('प्रेम')) {
-          return `💍 <strong>${astro.name} का दांपत्य परामर्श:</strong><br>${userName} जी, ${rKey} राशि के 7वें भाव (विवाह भाव) की दृष्टि से दांपत्य में वैचारिक सामंजस्य के लिए कम से कम 18 से अधिक अष्टकूट गुण मिलान होना चाहिए।<br><br>🕊️ <strong>उपाय:</strong> गुरुवार को केले के पेड़ को जल दें और प्रतिदिन <em>ॐ नमो भगवते वासुदेवाय</em> का 11 बार जप करें।`;
+          return `💍 <strong>${astro.name} का दांपत्य विश्लेषण:</strong><br>${name} जी, आपकी <strong>${rKey}</strong> राशि के 7वें भाव (विवाह भाव) के अनुसार मानसिक सौहार्द के लिए विवाह से पूर्व कम से कम 18 से अधिक गुण मिलान अवश्य करें।<br><br>🕊️ <strong>उपाय:</strong> गुरुवार को पीले वस्त्र या हल्दी का तिलक लगाएं और भगवान विष्णु की आराधना करें।`;
         }
         if (q.includes('shani') || q.includes('sade sati') || q.includes('शनि') || q.includes('साढ़े साती') || q.includes('ढैय्या')) {
-          return `🪐 <strong>${astro.name} का शनि गोचर विश्लेषण:</strong><br><strong>वर्तमान स्थिति:</strong> ${r.sadeSatiHi}<br><br>⚡ <strong>सरल अचूक उपाय:</strong> प्रत्येक शनिवार सूर्यास्त के समय पीपल के वृक्ष के नीचे सरसों के तेल का चौमुखा दीपक रखें और <em>ॐ शं शनैश्चराय नमः</em> मंत्र का जप करें।`;
+          return `🪐 <strong>${astro.name} का शनि गोचर विश्लेषण:</strong><br><strong>वर्तमान स्थिति:</strong> ${r.sadeSatiHi}<br><br>⚡ <strong>सरल अचूक उपाय:</strong> प्रत्येक शनिवार सूर्यास्त के समय पीपल के वृक्ष के नीचे सरसों के तेल का दीपक जलाएं और <em>ॐ शं शनैश्चराय नमः</em> का जाप करें।`;
         }
         if (q.includes('gemstone') || q.includes('stone') || q.includes('रत्न') || q.includes('color') || q.includes('रंग')) {
-          return `💎 <strong>${astro.name} की रत्न व शुभ तत्व अनुशंसा:</strong><br>• <strong>प्रधान रत्न:</strong> ${r.stoneEn}<br>• <strong>शुभ रंग:</strong> ${r.colorEn}<br>• <strong>भाग्यशाली अंक:</strong> ${r.num}<br>• <strong>राशि स्वामी:</strong> ${r.lordHi}<br><br><em>विशेष: रत्न हमेशा अनामिका या कनिष्ठा उंगली में शुभ मुहूर्त में ही धारण करें।</em>`;
+          return `💎 <strong>${astro.name} की रत्न व शुभ तत्व अनुशंसा:</strong><br>• <strong>प्रधान रत्न:</strong> ${r.stoneEn}<br>• <strong>शुभ रंग:</strong> ${r.colorEn}<br>• <strong>भाग्यशाली अंक:</strong> ${r.num}<br>• <strong>राशि स्वामी:</strong> ${r.lordHi}<br><br><em>सलाह: रत्न हमेशा अनामिका या कनिष्ठा उंगली में शुभ मुहूर्त में ही धारण करें।</em>`;
         }
         if (q.includes('remedy') || q.includes('उपाय') || q.includes('दोष') || q.includes('hurdle') || q.includes('रुकावट')) {
-          return `📿 <strong>${userName} जी के लिए अचूक वैदिक उपाय:</strong><br>आपकी ${rKey} राशि के अनुसार रुकावटें दूर करने के लिए:<br>1. प्रतिदिन प्रातः सूर्य देव को तांबे के लोटे से जल दें।<br>2. अपने भाग्यशाली रंग (<strong>${r.colorEn}</strong>) का अधिक प्रयोग करें।<br>3. नियमित रूप से <em>गायत्री मंत्र</em> का 11 बार जप करें।`;
+          return `📿 <strong>${name} जी के लिए रुकावट निवारण उपाय:</strong><br>आपकी ${rKey} राशि के अनुसार बाधाएं शांत करने के लिए:<br>1. प्रतिदिन प्रातः सूर्य को तांबे के लोटे से जल दें।<br>2. अपने शुभ रंग (<strong>${r.colorEn}</strong>) का अधिक उपयोग करें।<br>3. मंगलवार अथवा शनिवार को हनुमान चालीसा का पाठ करें।`;
         }
-        return `🕉️ <strong>${astro.name}:</strong><br>${userName} जी, आपकी <strong>${rKey}</strong> कुंडली मेरे समक्ष खुली है। आप मुझसे विशेष रूप से <strong>करियर/नौकरी, विवाह का समय, शनि साढ़े साती, अथवा सही रत्न</strong> के बारे में पूछें, मैं विस्तार से बताऊंगा।`;
+        return `🕉️ <strong>${astro.name}:</strong><br>${name} जी, आपकी <strong>${rKey}</strong> कुंडली मेरे समक्ष खुली है। आप मुझसे विशेष रूप से <strong>करियर/नौकरी, विवाह का समय, शनि साढ़े साती, अथवा सही रत्न</strong> के बारे में पूछें, मैं विस्तार से बताऊंगा।`;
       } else {
         if (q.includes('job') || q.includes('career') || q.includes('promotion') || q.includes('business') || q.includes('work')) {
-          return `💼 <strong>${astro.name}'s Analysis for ${userName}:</strong><br>Ruled by <strong>${r.lordEn}</strong>, your 10th house indicates strong professional momentum in: <em>${r.careerEn}</em>.<br><br>💡 <strong>Practical Advice:</strong> Planetary transits favor consistency. Schedule crucial meetings and job interviews during morning Amrit or Shubh Choghadiya hours.`;
+          return `💼 <strong>${astro.name}'s Career Guidance for ${name}:</strong><br>Ruled by <strong>${r.lordEn}</strong>, your 10th house of profession (Lagna: <em>${r.lagna}</em>) highlights key strengths in: <em>${r.careerEn}</em>.<br><br>💡 <strong>Practical Advice:</strong> Consistency will yield strong gains. Execute important deals and interviews during auspicious morning Choghadiya windows.`;
         }
         if (q.includes('marriage') || q.includes('wedding') || q.includes('relationship') || q.includes('love') || q.includes('partner')) {
-          return `💍 <strong>${astro.name}'s Marriage Guidance:</strong><br>${userName}, for your <strong>${rKey}</strong> chart, mental and emotional compatibility in the 7th house requires at least 18+ Ashtakoot Guna points without unmitigated Nadi dosha.<br><br>🕊️ <strong>Remedy:</strong> Offer water to Surya Dev every morning for emotional clarity.`;
+          return `💍 <strong>${astro.name}'s Marriage Guidance for ${name}:</strong><br>In your <strong>${rKey}</strong> natal chart, the 7th house of alliances indicates mental compatibility flourishes when Ashtakoot score exceeds 18 points without unmitigated Nadi dosha.<br><br>🕊️ <strong>Remedy:</strong> Offer water to Surya Dev every morning for emotional clarity.`;
         }
         if (q.includes('shani') || q.includes('sade sati') || q.includes('saturn') || q.includes('dhaiya')) {
-          return `🪐 <strong>${astro.name}'s Saturn (Shani) Report:</strong><br><strong>Status:</strong> ${r.sadeSatiEn}<br><br>⚡ <strong>Vedic Remedy:</strong> Light a mustard oil lamp under a Peepal tree on Saturday evenings and recite <em>Om Sham Shanaishcharaya Namah</em>. Charitable giving neutralizes malefic transit friction.`;
+          return `🪐 <strong>${astro.name}'s Saturn (Shani) Report for ${name}:</strong><br><strong>Current Status:</strong> ${r.sadeSatiEn}<br><br>⚡ <strong>Vedic Remedy:</strong> Light a mustard oil lamp under a Peepal tree on Saturday evenings and chant <em>Om Sham Shanaishcharaya Namah</em>. Charitable giving neutralizes malefic transit friction.`;
         }
         if (q.includes('gemstone') || q.includes('stone') || q.includes('lucky') || q.includes('color') || q.includes('number')) {
-          return `💎 <strong>${astro.name}'s Gemstone & Elements:</strong><br>• <strong>Primary Gemstone:</strong> ${r.stoneEn}<br>• <strong>Lucky Colors:</strong> ${r.colorEn}<br>• <strong>Destiny Number:</strong> ${r.num}<br>• <strong>Ruling Planet:</strong> ${r.lordEn}<br><br><em>Tip: Always energize gemstones on their corresponding planetary weekday during Shukla Paksha.</em>`;
+          return `💎 <strong>${astro.name}'s Gemstone & Elements for ${name}:</strong><br>• <strong>Primary Gemstone:</strong> ${r.stoneEn}<br>• <strong>Lucky Colors:</strong> ${r.colorEn}<br>• <strong>Destiny Number:</strong> ${r.num}<br>• <strong>Ruling Planet:</strong> ${r.lordEn}<br><br><em>Tip: Always energize gemstones on their corresponding planetary weekday during Shukla Paksha.</em>`;
         }
         if (q.includes('remedy') || q.includes('hurdle') || q.includes('obstacle') || q.includes('dosha')) {
-          return `📿 <strong>Vedic Remedial Guidance for ${userName}:</strong><br>To remove delays and obstacles in your ${rKey} chart:<br>1. Offer water to the rising sun daily in a copper vessel.<br>2. Incorporate your lucky color (<strong>${r.colorEn}</strong>) into interviews or business meetings.<br>3. Recite the Gayatri Mantra 11 times every morning.`;
+          return `📿 <strong>Vedic Remedial Guidance for ${name}:</strong><br>To remove delays and obstacles in your ${rKey} chart:<br>1. Offer water to the rising sun daily in a copper vessel.<br>2. Incorporate your lucky color (<strong>${r.colorEn}</strong>) into interviews or business meetings.<br>3. Recite the Gayatri Mantra 11 times every morning.`;
         }
-        return `🕉️ <strong>${astro.name}:</strong><br>${userName}, your <strong>${rKey}</strong> chart is active in front of me. What specific question do you have regarding your <strong>Career, Marriage, Shani Sade Sati, or Gemstones</strong>?`;
+        return `🕉️ <strong>${astro.name}:</strong><br>${name}, your <strong>${rKey}</strong> chart is active in front of me. What specific question do you have regarding your <strong>Career, Marriage, Shani Sade Sati, or Gemstones</strong>?`;
       }
     }
 
@@ -967,21 +1027,15 @@
       if (currentLang === 'hi') {
         document.getElementById('btnLangText').innerText = 'Switch to English';
         document.getElementById('txtTitle').innerText = 'विशेषज्ञ वैदिक ज्योतिषियों से निःशुल्क परामर्श लें';
-        document.getElementById('txtSubtitle').innerText = 'पहले अपना जन्म विवरण भरें ताकि आपकी कुंडली बनाई जा सके। इसके बाद नौकरी, विवाह व उपायों के बारे में बिना किसी फीस के पूछें।';
+        document.getElementById('txtSubtitle').innerText = 'ज्योतिषी से सीधे बात करें। बातचीत में अपना जन्म विवरण देकर अपनी कुंडली बनाएं और करियर, विवाह व उपायों की सटीक जानकारी पाएं।';
         document.getElementById('lblChooseAstro').innerText = 'ज्योतिषी चुनें (Choose Astrologer):';
-        document.getElementById('inName').placeholder = 'आपका नाम (उदा. राहुल)';
-        document.getElementById('inCity').placeholder = 'जन्म स्थान (उदा. गोरखपुर / दिल्ली)';
-        document.getElementById('userInput').placeholder = userDetails.isSubmitted ? 'अपना प्रश्न पूछें...' : 'पहले ऊपर अपना जन्म विवरण भरें...';
         document.getElementById('btnSend').innerText = 'भेजें ➤';
         document.getElementById('txtZeroStorage').innerText = '100% सुरक्षित (Zero Storage): आपकी कोई भी चैट या जन्म विवरण किसी सर्वर पर नहीं भेजा जाता।';
       } else {
         document.getElementById('btnLangText').innerText = 'हिंदी में बदलें (Hindi)';
         document.getElementById('txtTitle').innerText = 'Talk to Expert Vedic Astrologers for Free';
-        document.getElementById('txtSubtitle').innerText = 'Real-time consultation with Vedic pandits. Share your birth details to generate your Kundali chart, then ask about career, marriage, and remedies with zero charges.';
+        document.getElementById('txtSubtitle').innerText = 'An authentic 1-on-1 Vedic consultation. Share your details naturally with the astrologer to cast your Kundali, then ask about career, marriage, and remedies with zero charges.';
         document.getElementById('lblChooseAstro').innerText = 'Select Astrologer (ज्योतिषी चुनें):';
-        document.getElementById('inName').placeholder = 'Your Name (e.g. Rahul)';
-        document.getElementById('inCity').placeholder = 'Birth City (e.g. Gorakhpur / Delhi)';
-        document.getElementById('userInput').placeholder = userDetails.isSubmitted ? 'Ask your question...' : 'First fill in your birth details above...';
         document.getElementById('btnSend').innerText = 'Send ➤';
         document.getElementById('txtZeroStorage').innerText = '100% Private & In-Browser: No mobile numbers, cookies, or chat logs are ever uploaded to any server.';
       }
