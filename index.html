@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>OpenAstrologer - Real-Life 1-on-1 Vedic Astrologer Chat</title>
-  <meta name="description" content="100% Free real-time interactive Vedic astrologer chat. Conversational birth detail collection, instant Kundali casting, career, marriage and remedies guidance. 100% private.">
+  <title>OpenAstrologer - Real 1-on-1 Vedic Consultations (100% Free)</title>
+  <meta name="description" content="Talk directly with compassionate Vedic astrologers for free. Real-time Kundali casting, career, relationship & remedies consultation with zero fees and complete privacy.">
 
-  <!-- Dynamic SVG Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f172a' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M16 5l3 7 7 3-7 3-3 7-3-7-7-3 7-3z' fill='%23f59e0b'/%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%2338bdf8'/%3E%3Ccircle cx='24' cy='8' r='1.5' fill='%2338bdf8'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070d18' stroke='%23f59e0b' stroke-width='1.5'/%3E%3Cpath d='M16 5l3 7 7 3-7 3-3 7-3-7-7-3 7-3z' fill='%23f59e0b'/%3E%3Ccircle cx='8' cy='8' r='1.5' fill='%2338bdf8'/%3E%3Ccircle cx='24' cy='8' r='1.5' fill='%2338bdf8'/%3E%3C/svg%3E">
 
   <style>
     :root {
@@ -21,7 +20,6 @@
       --primary: #f59e0b;
       --primary-hover: #d97706;
       --accent: #10b981;
-      --danger: #ef4444;
       --radius: 14px;
     }
     * {
@@ -48,7 +46,7 @@
     }
     .container {
       width: 100%;
-      max-width: 960px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 1.25rem 1rem 3.5rem 1rem;
     }
@@ -111,7 +109,7 @@
       margin: 0 auto;
     }
 
-    /* ASTROLOGER ROSTER */
+    /* ASTROLOGER ROSTER CAROUSEL */
     .roster-label {
       font-size: 0.82rem;
       font-weight: 700;
@@ -122,7 +120,7 @@
     }
     .astrologer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 10px;
       margin-bottom: 1.25rem;
     }
@@ -148,29 +146,33 @@
     }
     .astro-avatar-box {
       position: relative;
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       background: #172338;
-      border: 1.5px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
+      border: 2px solid var(--border);
+      overflow: hidden;
       flex-shrink: 0;
+    }
+    .astro-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
     .online-indicator {
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 12px;
-      height: 12px;
+      bottom: 2px;
+      right: 2px;
+      width: 11px;
+      height: 11px;
       background: var(--accent);
       border: 2px solid var(--card);
       border-radius: 50%;
+      box-shadow: 0 0 4px var(--accent);
     }
     .astro-details strong { display: block; color: #fff; font-size: 0.95rem; }
-    .astro-details span { display: block; font-size: 0.75rem; color: var(--muted); }
+    .astro-details span { display: block; font-size: 0.74rem; color: var(--muted); }
     .astro-rate { margin-left: auto; text-align: right; }
     .tag-free {
       background: rgba(16, 185, 129, 0.15);
@@ -244,7 +246,7 @@
     .chat-box {
       display: flex;
       flex-direction: column;
-      height: 540px;
+      height: 560px;
       background: var(--card-inner);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
@@ -259,7 +261,15 @@
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
     }
-    .header-profile { display: flex; align-items: center; gap: 10px; }
+    .header-profile { display: flex; align-items: center; gap: 12px; }
+    .header-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1.5px solid var(--primary);
+    }
+    .header-avatar img { width: 100%; height: 100%; object-fit: cover; }
     .profile-title strong { font-size: 0.95rem; color: #fff; display: block; }
     .profile-title span { font-size: 0.72rem; color: var(--accent); font-weight: 600; }
     .session-badge {
@@ -301,7 +311,6 @@
       border-bottom-right-radius: 2px;
     }
 
-    /* IN-CHAT INTERACTIVE ACTION BUBBLES */
     .in-chat-actions {
       display: flex;
       flex-wrap: wrap;
@@ -324,7 +333,6 @@
       color: #0b1120;
     }
 
-    /* Typing indicator */
     .typing-box {
       display: none;
       align-self: flex-start;
@@ -482,60 +490,96 @@
             <circle cx="24" cy="8" r="1.5" fill="#38bdf8"/>
           </svg>
           <span class="brand-name">Open<span style="color:#f59e0b;">Astrologer</span></span>
-          <span class="brand-badge">Real-Life Vedic Experience</span>
+          <span class="brand-badge">Compassionate Vedic Guidance</span>
         </div>
         <button type="button" class="lang-toggle-btn" onclick="toggleLanguage()">
           🌐 <span id="btnLangText">हिंदी में बदलें (Hindi)</span>
         </button>
       </div>
 
-      <h1 id="txtTitle">Talk to Expert Vedic Astrologers for Free</h1>
-      <p id="txtSubtitle">An authentic 1-on-1 Vedic consultation. Share your details naturally with the astrologer to cast your Kundali, then ask about career, marriage, and remedies with zero fees.</p>
+      <h1 id="txtTitle">Talk to Compassionate Vedic Astrologers for Free</h1>
+      <p id="txtSubtitle">Connect 1-on-1 with genuine, empathetic astrologers. Share your birth details to cast your Kundali, then ask about relationships, career, and inner peace with zero fees or data tracking.</p>
     </header>
 
-    <!-- ROSTER OF ASTROLOGERS -->
+    <!-- ROSTER OF 6 AUTHENTIC ASTROLOGERS (4 FEMALE, 2 MALE) -->
     <div class="roster-label" id="lblChooseAstro">Select Astrologer (ज्योतिषी चुनें):</div>
     <div class="astrologer-grid">
-      <div class="astro-card selected" id="cardAstro1" onclick="selectAstrologer('shastri')">
+      <!-- 1. Tarot Ananya Sen (Female - Love & Soulmate) -->
+      <div class="astro-card selected" id="cardAstro_ananya" onclick="selectAstrologer('ananya')">
         <div class="astro-avatar-box">
-          🧙‍♂️
+          <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=891927206910758" alt="Tarot Ananya Sen" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80'">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
-          <strong>Acharya Shastri</strong>
-          <span>Career, Business & Kundali</span>
+          <strong>Ananya Sen</strong>
+          <span>Love, Soulmates & Relationships</span>
         </div>
-        <div class="astro-rate">
-          <span class="tag-free">100% Free</span>
-        </div>
+        <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <div class="astro-card" id="cardAstro2" onclick="selectAstrologer('radhika')">
+      <!-- 2. Dr. Radhika Sharma (Female - Marriage & Family) -->
+      <div class="astro-card" id="cardAstro_radhika" onclick="selectAstrologer('radhika')">
         <div class="astro-avatar-box">
-          🧕
+          <img src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=61588049433860" alt="Dr. Radhika Sharma" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80'">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
           <strong>Dr. Radhika Sharma</strong>
-          <span>Marriage, Compatibility & Love</span>
+          <span>Marriage Timing & Guna Milan</span>
         </div>
-        <div class="astro-rate">
-          <span class="tag-free">100% Free</span>
-        </div>
+        <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
 
-      <div class="astro-card" id="cardAstro3" onclick="selectAstrologer('mishra')">
+      <!-- 3. Acharya Meenakshi (Female - Career & Finance) -->
+      <div class="astro-card" id="cardAstro_meenakshi" onclick="selectAstrologer('meenakshi')">
         <div class="astro-avatar-box">
-          🕉️
+          <img src="https://users-photos.b-cdn.net/245862/media/asset/0120-AJ-6579.jpeg?width=1080" alt="Acharya Meenakshi" onerror="this.src='https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80'">
+          <span class="online-indicator"></span>
+        </div>
+        <div class="astro-details">
+          <strong>Acharya Meenakshi</strong>
+          <span>Career, Govt Jobs & Business</span>
+        </div>
+        <div class="astro-rate"><span class="tag-free">Free</span></div>
+      </div>
+
+      <!-- 4. Jyotishi Priyadarshini Rao (Female - Remedies & Doshas) -->
+      <div class="astro-card" id="cardAstro_priyadarshini" onclick="selectAstrologer('priyadarshini')">
+        <div class="astro-avatar-box">
+          <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=150&q=80" alt="Jyotishi Priyadarshini" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'">
+          <span class="online-indicator"></span>
+        </div>
+        <div class="astro-details">
+          <strong>Priyadarshini Rao</strong>
+          <span>Doshas, Gemstones & Peace</span>
+        </div>
+        <div class="astro-rate"><span class="tag-free">Free</span></div>
+      </div>
+
+      <!-- 5. Acharya Shastri (Male - Vedic Kundali) -->
+      <div class="astro-card" id="cardAstro_shastri" onclick="selectAstrologer('shastri')">
+        <div class="astro-avatar-box">
+          <img src="https://media.istockphoto.com/id/2206461676/photo/old-priest-with-rudraksha-posing-on-white-background.jpg?s=612x612&w=0&k=20&c=lLbDM3wcqLf1ORlEDjYVlx1vmuns5kIDN9e11yIurug=" alt="Acharya Shastri" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'">
+          <span class="online-indicator"></span>
+        </div>
+        <div class="astro-details">
+          <strong>Acharya Shastri</strong>
+          <span>Vedic Horoscope & Kundali</span>
+        </div>
+        <div class="astro-rate"><span class="tag-free">Free</span></div>
+      </div>
+
+      <!-- 6. Pandit K.K. Mishra (Male - Shani Sade Sati) -->
+      <div class="astro-card" id="cardAstro_mishra" onclick="selectAstrologer('mishra')">
+        <div class="astro-avatar-box">
+          <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Pandit Mishra" onerror="this.src='https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80'">
           <span class="online-indicator"></span>
         </div>
         <div class="astro-details">
           <strong>Pandit K.K. Mishra</strong>
-          <span>Sade Sati, Remedies & Gems</span>
+          <span>Shani Sade Sati & Navagraha</span>
         </div>
-        <div class="astro-rate">
-          <span class="tag-free">100% Free</span>
-        </div>
+        <div class="astro-rate"><span class="tag-free">Free</span></div>
       </div>
     </div>
 
@@ -545,7 +589,7 @@
         <div class="drawer-title">
           <span>📜 Your Vedic Kundali Chart (जन्म कुण्डली)</span>
         </div>
-        <span class="status-badge status-pending" id="badgeChartStatus">⚠️️ Awaiting Birth Details</span>
+        <span class="status-badge status-pending" id="badgeChartStatus">⚠ Awaiting Birth Details</span>
       </div>
 
       <div class="matrix-pills" id="matrixPills">
@@ -572,10 +616,12 @@
     <div class="chat-box">
       <div class="chat-header">
         <div class="header-profile">
-          <div style="font-size:1.4rem;" id="chatHeaderIcon">🧙‍♂️</div>
+          <div class="header-avatar">
+            <img id="chatHeaderImg" src="https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=891927206910758" alt="Astrologer">
+          </div>
           <div class="profile-title">
-            <strong id="txtActiveAstroName">Acharya Shastri</strong>
-            <span id="txtActiveAstroSpec">Career, Business & Kundali Specialist • Live</span>
+            <strong id="txtActiveAstroName">Ananya Sen</strong>
+            <span id="txtActiveAstroSpec">Love, Soulmates & Relationships Specialist • Online</span>
           </div>
         </div>
         <div class="session-badge" id="sessionTimer">FREE SESSION: 00:00</div>
@@ -583,7 +629,7 @@
 
       <div class="chat-body" id="chatBody">
         <div class="msg msg-astro" id="msgFirst">
-          <!-- Populated by JS -->
+          <!-- Dynamically filled with soft human greeting -->
         </div>
         <div class="typing-box" id="typingIndicator">
           <span class="t-dot"></span>
@@ -592,17 +638,17 @@
         </div>
       </div>
 
-      <!-- QUICK PROMPT CHIPS (Active only after Kundali is cast) -->
+      <!-- QUICK PROMPT CHIPS -->
       <div class="quick-chips-bar" id="chipsBar" style="opacity:0.5; pointer-events:none;">
-        <span class="chip" onclick="askQuick('When will I get a good job or career promotion?')">💼 Job & Career</span>
-        <span class="chip" onclick="askQuick('When is my marriage yoga forming?')">💍 Marriage Timing</span>
-        <span class="chip" onclick="askQuick('Am I affected by Shani Sade Sati or Dhaiya right now?')">🪐 Shani Sade Sati</span>
-        <span class="chip" onclick="askQuick('Which gemstone and lucky color suit my chart?')">💎 Lucky Gemstone</span>
-        <span class="chip" onclick="askQuick('What Vedic remedy can remove hurdles in my work?')">📿 Obstacle Remedy</span>
+        <span class="chip" onclick="askQuick('When will I meet my soulmate or get married?')">💍 Soulmate & Marriage</span>
+        <span class="chip" onclick="askQuick('What does my career and financial growth look like?')">💼 Career & Growth</span>
+        <span class="chip" onclick="askQuick('How is my planetary peace and Shani transit right now?')">🪐 Shani & Planetary Peace</span>
+        <span class="chip" onclick="askQuick('Which gemstone and lucky colors will bring me positive energy?')">💎 Lucky Gemstone</span>
+        <span class="chip" onclick="askQuick('Can you recommend a gentle daily remedy for peace of mind?')">📿 Gentle Daily Remedy</span>
       </div>
 
       <div class="chat-footer">
-        <input type="text" id="userInput" placeholder="Type your answer here..." onkeypress="handleKey(event)">
+        <input type="text" id="userInput" placeholder="Type your answer softly here..." onkeypress="handleKey(event)">
         <button class="send-btn" onclick="sendMessage()" id="btnSend">Send ➤</button>
       </div>
     </div>
@@ -644,17 +690,15 @@
 
   <script>
     let currentLang = 'en';
-    let currentAstrologer = 'shastri';
+    let currentAstrologer = 'ananya';
 
-    // ONBOARDING CONVERSATIONAL STATE MACHINE:
-    // 'ask_name' -> 'ask_gender' -> 'ask_dob' -> 'ask_tob' -> 'ask_place' -> 'ready'
     let chatState = 'ask_name';
 
     let userProfile = {
       name: '',
       gender: '',
-      dob: null,    // Date object
-      tob: '12:00', // Approximate time
+      rawDob: '',
+      tob: '12:00',
       place: '',
       rashi: '',
       lagna: '',
@@ -663,46 +707,69 @@
     };
 
     const astrologers = {
-      shastri: {
-        name: 'Acharya Shastri',
-        icon: '🧙‍♂️',
-        specEn: 'Career, Business & Kundali Specialist • Live',
-        specHi: 'करियर, व्यापार व कुंडली विशेषज्ञ • लाइव',
-        introEn: '🙏 <strong>Pranam!</strong> I am Acharya Shastri. Before I can look into your planetary houses and forecast your future, I must cast your Vedic Kundali.<br><br>First, may I know your <strong>Full Name</strong>?',
-        introHi: '🙏 <strong>प्रणाम!</strong> मैं आचार्य शास्त्री हूँ। आपके भविष्य और ग्रह गोचर का सटीक अध्ययन करने के लिए मुझे पहले आपकी वैदिक जन्म कुंडली बनानी होगी।<br><br>सबसे पहले, कृपया अपना <strong>शुभ नाम</strong> बताएं?'
+      ananya: {
+        name: 'Ananya Sen',
+        img: 'https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=891927206910758',
+        specEn: 'Love, Soulmates & Relationships Specialist • Online',
+        specHi: 'प्रेम, जीवनसाथी व संबंध विशेषज्ञ • ऑनलाइन',
+        introEn: '🌸 <strong>Hello dear, welcome.</strong> I am Ananya. Sometimes our hearts carry questions that only the stars can gently illuminate. I am here to listen and guide you without judgment.<br><br>To begin understanding your planetary vibrations, what may I lovingly call you? (Your name)',
+        introHi: '🌸 <strong>नमस्ते प्रिय, आपका स्वागत है।</strong> मैं अनन्य हूँ। कई बार मन में ऐसे सवाल होते हैं जिनका उत्तर केवल ग्रह ही दे सकते हैं। मैं यहाँ पूरी आत्मीयता से आपका मार्गदर्शन करने आई हूँ।<br><br>आपसे जुड़ने के लिए, कृपया अपना प्यारा सा नाम बताएं?'
       },
       radhika: {
         name: 'Dr. Radhika Sharma',
-        icon: '🧕',
-        specEn: 'Marriage, Compatibility & Love Specialist • Live',
-        specHi: 'विवाह, गुण मिलान व संबंध विशेषज्ञ • लाइव',
-        introEn: '🌸 <strong>Namaste!</strong> I am Dr. Radhika Sharma. To examine your 7th house of marriage and relationship yogas, I require your birth coordinates.<br><br>To begin, what is your <strong>Full Name</strong>?',
-        introHi: '🌸 <strong>नमस्ते!</strong> मैं डॉ. राधिका शर्मा हूँ। आपके दांपत्य सुख व विवाह योग के विश्लेषण के लिए मुझे आपकी जन्म कुंडली तैयार करनी होगी।<br><br>शुरुआत के लिए, आपका <strong>शुभ नाम</strong> क्या है?'
+        img: 'https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=61588049433860',
+        specEn: 'Marriage Timing & Guna Milan Specialist • Online',
+        specHi: 'विवाह योग व गुण मिलान विशेषज्ञ • ऑनलाइन',
+        introEn: '🙏 <strong>Namaste, bless you.</strong> I am Dr. Radhika Sharma. In Vedic wisdom, timing is everything—especially when it comes to marriage, family harmony, and peaceful unions.<br><br>Before I cast your birth chart, may I know your <strong>Full Name</strong>?',
+        introHi: '🙏 <strong>नमस्ते, सदा सुखी रहें।</strong> मैं डॉ. राधिका शर्मा हूँ। जीवन में सही समय पर सही निर्णय और वैवाहिक सुख अत्यंत महत्वपूर्ण है।<br><br>आपकी जन्म कुंडली देखने से पहले, क्या मैं आपका <strong>शुभ नाम</strong> जान सकती हूँ?'
+      },
+      meenakshi: {
+        name: 'Acharya Meenakshi',
+        img: 'https://users-photos.b-cdn.net/245862/media/asset/0120-AJ-6579.jpeg?width=1080',
+        specEn: 'Career, Govt Jobs & Business Specialist • Online',
+        specHi: 'करियर, सरकारी नौकरी व व्यापार विशेषज्ञ • ऑनलाइन',
+        introEn: '✨ <strong>Pranam, welcome.</strong> I am Acharya Meenakshi. Your 10th house of karma reflects your true potential and success. Do not worry about hurdles; the planets always provide a pathway forward.<br><br>To map your career houses, what is your <strong>Full Name</strong>?',
+        introHi: '✨ <strong>प्रणाम, आपका स्वागत है।</strong> मैं आचार्य मीनाक्षी हूँ। आपकी कुंडली का 10वां भाव आपकी मेहनत और सफलता का मार्ग तय करता है। जीवन की रुकावटों से घबराएं नहीं।<br><br>आपकी कुंडली की दशा देखने के लिए, कृपया अपना <strong>शुभ नाम</strong> बताएं?'
+      },
+      priyadarshini: {
+        name: 'Priyadarshini Rao',
+        img: 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=150&q=80',
+        specEn: 'Doshas, Gemstones & Peace Specialist • Online',
+        specHi: 'दोष निवारण, रत्न व मानसिक शांति विशेषज्ञ • ऑनलाइन',
+        introEn: '🌿 <strong>Warm greetings.</strong> I am Priyadarshini Rao. Every soul goes through turbulent transits, but with gentle Vedic remedies, positive gemstones, and right mantras, balance always returns.<br><br>Could you please share your <strong>Name</strong> so we can connect?',
+        introHi: '🌿 <strong>सादर प्रणाम।</strong> मैं प्रियदर्शिनी राव हूँ। जीवन में उतार-चढ़ाव आते रहते हैं, लेकिन सरल वैदिक उपायों और सही रत्नों से शांति लौट आती है।<br><br>आपकी ग्रह शांति के लिए, कृपया अपना <strong>शुभ नाम</strong> बताएं?'
+      },
+      shastri: {
+        name: 'Acharya Shastri',
+        img: 'https://media.istockphoto.com/id/2206461676/photo/old-priest-with-rudraksha-posing-on-white-background.jpg?s=612x612&w=0&k=20&c=lLbDM3wcqLf1ORlEDjYVlx1vmuns5kIDN9e11yIurug=',
+        specEn: 'Vedic Horoscope & Kundali Specialist • Online',
+        specHi: 'वैदिक ज्योतिष व कुंडली विशेषज्ञ • ऑनलाइन',
+        introEn: '🔱 <strong>Pranam!</strong> I am Acharya Shastri. Decades of observing planetary degrees have shown me that destiny unfolds best with clarity. Let us map your birth matrix.<br><br>Please share your <strong>Full Name</strong> to begin.',
+        introHi: '🔱 <strong>प्रणाम!</strong> मैं आचार्य शास्त्री हूँ। ग्रहों की चाल जीवन में दिशा दिखाती है। आइए आपकी जन्म कुंडली का सूक्ष्म अध्ययन करें।<br><br>शुरुआत के लिए अपना <strong>पूरा नाम</strong> लिखें।'
       },
       mishra: {
         name: 'Pandit K.K. Mishra',
-        icon: '🕉️',
-        specEn: 'Sade Sati, Remedies & Gemstones Specialist • Live',
-        specHi: 'साढ़े साती, वैदिक उपाय व रत्न विशेषज्ञ • लाइव',
-        introEn: '🔱 <strong>Jai Shri Ram!</strong> I am Pandit K.K. Mishra. To inspect your Saturn (Shani) transits, doshas, and suitable gemstones, I need your natal chart.<br><br>Please tell me your <strong>Full Name</strong> first.',
-        introHi: '🔱 <strong>जय श्री राम!</strong> मैं पंडित के.के. मिश्रा हूँ। शनि साढ़े साती, कालसर्प शांति व भाग्यशाली रत्नों की सटीक जांच के लिए कुंडली आवश्यक है।<br><br>सर्वप्रथम अपना <strong>पूरा नाम</strong> बताएं।'
+        img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
+        specEn: 'Shani Sade Sati & Navagraha Specialist • Online',
+        specHi: 'शनि साढ़े साती व नवग्रह शांति विशेषज्ञ • ऑनलाइन',
+        introEn: '🕉️ <strong>Jai Shri Ram.</strong> I am Pandit K.K. Mishra. Saturn is not a punisher; he is a teacher who shapes our strength. Tell me what brings you here today after we calculate your birth chart.<br><br>First, what is your <strong>Full Name</strong>?',
+        introHi: '🕉️ <strong>जय श्री राम।</strong> मैं पंडित के.के. मिश्रा हूँ। शनिदेव हमें तपस्या और अनुशासन सिखाते हैं। आपकी जन्म कुंडली से सब स्पष्ट हो जाएगा।<br><br>सर्वप्रथम अपना <strong>शुभ नाम</strong> बताएं।'
       }
     };
 
-    // Authentic Vedic Rashi Data
     const rashiData = {
-      Mesh: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Red / Saffron', num: 9, nakshatra: 'Ashwini / Bharani', lagna: 'Mesha (मेष)', sadeSatiEn: 'No active Sade Sati. Strong Martian drive.', sadeSatiHi: 'साढ़े साती नहीं है। मंगल का प्रभाव मजबूत है।', careerEn: 'Technical execution, defense, civil engineering, and leadership roles excel.', careerHi: 'इंजीनियरिंग, पुलिस/सेना, रियल एस्टेट व तकनीकी क्षेत्रों में सफलता।' },
-      Vrishabha: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Opal / Diamond (ओपल / हीरा)', colorEn: 'White / Cream', num: 6, nakshatra: 'Krittika / Rohini', lagna: 'Vrishabha (वृषभ)', sadeSatiEn: 'Free of Sade Sati. Jupiter aspect brings steady expansion.', sadeSatiHi: 'साढ़े साती से मुक्त। गुरु के प्रभाव से आर्थिक स्थिरता।', careerEn: 'Finance, banking, luxury design, catering, and architecture prosper.', careerHi: 'बैंकिंग, वित्त, फैशन, कला व खाद्य व्यवसाय में लाभ।' },
-      Mithun: { lordEn: 'Mercury (बुध)', lordHi: 'बुध', stoneEn: 'Emerald (पन्ना)', colorEn: 'Green (हरा)', num: 5, nakshatra: 'Mrigashira / Ardra', lagna: 'Mithuna (मिथुन)', sadeSatiEn: 'Clear of Sade Sati. High intellect and communication advantage.', sadeSatiHi: 'साढ़े साती नहीं है। व्यापार और बौद्धिक कार्यों के लिए उत्तम।', careerEn: 'IT, coding, media, public relations, analytics, and trading.', careerHi: 'आईटी, संचार, मीडिया, व्यापार और कंसल्टेंसी।' },
-      Kark: { lordEn: 'Moon (चंद्र)', lordHi: 'चंद्रमा', stoneEn: 'Natural Pearl (सच्चा मोती)', colorEn: 'Silver / Milky White', num: 2, nakshatra: 'Punarvasu / Pushya', lagna: 'Karka (कर्क)', sadeSatiEn: 'Under Shani Dhaiya influence; maintain financial discipline.', sadeSatiHi: 'शनि की ढैय्या का प्रभाव है। खर्चों पर नियंत्रण रखें।', careerEn: 'Healthcare, pharmaceuticals, catering, administrative civil roles.', careerHi: 'चिकित्सा, शिक्षा, प्रशासन, होटल व जनसेवा।' },
-      Simha: { lordEn: 'Sun (सूर्य)', lordHi: 'सूर्य देव', stoneEn: 'Ruby (माणिक्य)', colorEn: 'Golden Yellow / Orange', num: 1, nakshatra: 'Magha / Purva Phalguni', lagna: 'Simha (सिंह)', sadeSatiEn: 'Zero Sade Sati. Royal energy supports promotion and authority.', sadeSatiHi: 'साढ़े साती नहीं है। पदोन्नति और यश के अच्छे योग।', careerEn: 'Government administrative civil jobs, executive management, and politics.', careerHi: 'सरकारी नौकरी, प्रशासनिक सेवा व नेतृत्व वाले पद।' },
-      Kanya: { lordEn: 'Mercury (बुध)', lordHi: 'बुध', stoneEn: 'Emerald (पन्ना)', colorEn: 'Light Green', num: 5, nakshatra: 'Uttara Phalguni / Hasta', lagna: 'Kanya (कन्या)', sadeSatiEn: 'Clear of Sade Sati. Analytical skills give strong advantages.', sadeSatiHi: 'साढ़े साती से मुक्त। बौद्धिक कार्यों में बड़ी सफलता।', careerEn: 'Audit, corporate finance, medical research, and logistics.', careerHi: 'ऑडिट, अकाउंट्स, चिकित्सा, अनुसंधान व लेखन।' },
-      Tula: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Diamond / Zircon (हीरा / जरकन)', colorEn: 'Sky Blue / White', num: 6, nakshatra: 'Chitra / Swati', lagna: 'Tula (तुला)', sadeSatiEn: 'Favorable planetary position. High personal harmony.', sadeSatiHi: 'साढ़े साती नहीं है। जीवन में सुख व सौहार्द के योग।', careerEn: 'Judiciary, corporate law, international diplomacy, and design.', careerHi: 'वकालत, फैशन, इंटीरियर डिजाइनिंग व व्यापार।' },
-      Vrishchik: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Dark Red / Maroon', num: 9, nakshatra: 'Vishakha / Anuradha', lagna: 'Vrishchika (वृश्चिक)', sadeSatiEn: 'Under Shani Dhaiya phase. Practice regular Hanuman Chalisa.', sadeSatiHi: 'शनि की ढैय्या सक्रिय है। नियमित हनुमान चालीसा पढ़ें।', careerEn: 'Surgery, chemical research, defense intelligence, and investigation.', careerHi: 'फार्मा, सर्जरी, रक्षा विभाग व खोजी कार्य।' },
-      Dhanu: { lordEn: 'Jupiter (गुरु)', lordHi: 'बृहस्पति (गुरु)', stoneEn: 'Yellow Sapphire (पुखराज)', colorEn: 'Bright Yellow (पीला)', num: 3, nakshatra: 'Mula / Purva Ashadha', lagna: 'Dhanu (धनु)', sadeSatiEn: 'Completely free from Sade Sati. Exceptional spiritual and career rise.', sadeSatiHi: 'साढ़े साती से पूरी तरह मुक्त। करियर में उन्नति का समय।', careerEn: 'Higher education, advisory, banking, spirituality, and publishing.', careerHi: 'शिक्षा, वित्त, परामर्श, कानून व प्रकाशन।' },
-      Makar: { lordEn: 'Saturn (शनि)', lordHi: 'शनि देव', stoneEn: 'Blue Sapphire (नीलम) / Amethyst', colorEn: 'Navy Blue / Black', num: 8, nakshatra: 'Uttara Ashadha / Shravana', lagna: 'Makara (मकर)', sadeSatiEn: 'Final descending phase (Utarti) of Sade Sati. Steady relief arriving.', sadeSatiHi: 'साढ़े साती का अंतिम चरण (उतरती)। राहत और लाभ के योग।', careerEn: 'Heavy infrastructure, mining, civil manufacturing, and law.', careerHi: 'निर्माण, मैन्युफैक्चरिंग, कृषि व लॉजिस्टिक्स।' },
-      Kumbh: { lordEn: 'Saturn (शनि)', lordHi: 'शनि देव', stoneEn: 'Blue Sapphire (नीलम)', colorEn: 'Electric Blue', num: 8, nakshatra: 'Dhanishta / Shatabhisha', lagna: 'Kumbha (कुंभ)', sadeSatiEn: 'Peak phase of Sade Sati. Avoid high-risk speculative financial trades.', sadeSatiHi: 'साढ़े साती का मुख्य चरण। सोच-समझकर निर्णय लें।', careerEn: 'Aviation, scientific software, renewable energy, and humanitarian work.', careerHi: 'तकनीक, विमानन, विज्ञान व सामाजिक कार्य।' },
-      Meen: { lordEn: 'Jupiter (गुरु)', lordHi: 'बृहस्पति (गुरु)', stoneEn: 'Yellow Sapphire (पुखराज)', colorEn: 'Golden Yellow', num: 3, nakshatra: 'Purva Bhadrapada / Revati', lagna: 'Meena (मीन)', sadeSatiEn: 'Initial ascending phase (Chadhti) of Sade Sati. Practice meditation.', sadeSatiHi: 'साढ़े साती का प्रथम चरण (चढ़ती)। धैर्य व ध्यान आवश्यक।', careerEn: 'Creative arts, literature, shipping, psychology, and counseling.', careerHi: 'कला, साहित्य, परामर्श, विदेश व्यापार व मनोविज्ञान।' }
+      Mesh: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Red / Saffron', num: 9, nakshatra: 'Ashwini / Bharani', lagna: 'Mesha (मेष)', sadeSatiEn: 'Free of Sade Sati. Strong Martian fire and courage supporting you.', sadeSatiHi: 'साढ़े साती नहीं है। मंगल की शक्ति आपके साथ है।', careerEn: 'Leadership, technical execution, defense, real estate, and bold ventures.', careerHi: 'प्रशासन, इंजीनियरिंग, पुलिस/सेना, रियल एस्टेट व स्वतंत्र नेतृत्व।' },
+      Vrishabha: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Opal / Diamond (ओपल / हीरा)', colorEn: 'White / Soft Pink', num: 6, nakshatra: 'Krittika / Rohini', lagna: 'Vrishabha (वृषभ)', sadeSatiEn: 'Free of Sade Sati. Favorable Jupiter aspect bringing sweet stability.', sadeSatiHi: 'साढ़े साती से मुक्त। गुरु कृपा से पारिवारिक व आर्थिक स्थिरता।', careerEn: 'Finance, luxury arts, design, hospitality, banking, and creative entrepreneurship.', careerHi: 'बैंकिंग, वित्त, फैशन, कला व खाद्य व्यवसाय में लाभ।' },
+      Mithun: { lordEn: 'Mercury (बुध)', lordHi: 'बुध', stoneEn: 'Emerald (पन्ना)', colorEn: 'Fresh Green (हरा)', num: 5, nakshatra: 'Mrigashira / Ardra', lagna: 'Mithuna (मिथुन)', sadeSatiEn: 'Clear of Sade Sati. Quick intellect and communication giving you an edge.', sadeSatiHi: 'साढ़े साती नहीं है। बुद्धि और वाणी का उत्तम सहयोग।', careerEn: 'Communications, media, software, consultancy, writing, and digital trade.', careerHi: 'आईटी, संचार, मीडिया, व्यापार और कंसल्टेंसी।' },
+      Kark: { lordEn: 'Moon (चंद्र)', lordHi: 'चंद्रमा', stoneEn: 'Natural Pearl (सच्चा मोती)', colorEn: 'Silver / Milky White', num: 2, nakshatra: 'Punarvasu / Pushya', lagna: 'Karka (कर्क)', sadeSatiEn: 'Under gentle Shani Dhaiya influence; keep your emotions calm and steady.', sadeSatiHi: 'शनि की ढैय्या का प्रभाव है। मन शांत रखें, सब शुभ होगा।', careerEn: 'Healthcare, teaching, creative counseling, hospitality, and civil services.', careerHi: 'चिकित्सा, शिक्षा, प्रशासन, होटल व जनसेवा।' },
+      Simha: { lordEn: 'Sun (सूर्य)', lordHi: 'सूर्य देव', stoneEn: 'Ruby (माणिक्य)', colorEn: 'Golden Yellow / Royal Orange', num: 1, nakshatra: 'Magha / Purva Phalguni', lagna: 'Simha (सिंह)', sadeSatiEn: 'Zero Sade Sati. Radiant solar warmth supports your confidence.', sadeSatiHi: 'साढ़े साती नहीं है। सूर्य देव की कृपा से यश और मान-सम्मान।', careerEn: 'Government roles, executive leadership, creative direction, and social authority.', careerHi: 'सरकारी नौकरी, प्रशासनिक सेवा व नेतृत्व वाले पद।' },
+      Kanya: { lordEn: 'Mercury (बुध)', lordHi: 'बुध', stoneEn: 'Emerald (पन्ना)', colorEn: 'Light Green', num: 5, nakshatra: 'Uttara Phalguni / Hasta', lagna: 'Kanya (कन्या)', sadeSatiEn: 'Clear of Sade Sati. Your sharp eye for detail will resolve complicated matters.', sadeSatiHi: 'साढ़े साती से मुक्त। आपकी समझदारी हर मुश्किल हल करेगी।', careerEn: 'Auditing, corporate strategy, medical diagnostics, research, and analysis.', careerHi: 'ऑडिट, अकाउंट्स, चिकित्सा, अनुसंधान व लेखन।' },
+      Tula: { lordEn: 'Venus (शुक्र)', lordHi: 'शुक्र', stoneEn: 'Diamond / Zircon (हीरा / जरकन)', colorEn: 'Sky Blue / Soft White', num: 6, nakshatra: 'Chitra / Swati', lagna: 'Tula (तुला)', sadeSatiEn: 'Favorable planetary alignment. Harmony is returning to your close bonds.', sadeSatiHi: 'साढ़े साती नहीं है। जीवन में सुख व सौहार्द के अच्छे योग।', careerEn: 'Judiciary, diplomacy, public relations, fashion, and international partnerships.', careerHi: 'वकालत, फैशन, इंटीरियर डिजाइनिंग व व्यापार।' },
+      Vrishchik: { lordEn: 'Mars (मंगल)', lordHi: 'मंगल', stoneEn: 'Red Coral (मूंगा)', colorEn: 'Deep Red / Maroon', num: 9, nakshatra: 'Vishakha / Anuradha', lagna: 'Vrishchika (वृश्चिक)', sadeSatiEn: 'Under Shani Dhaiya phase. Chanting Hanuman Chalisa brings inner resilience.', sadeSatiHi: 'शनि की ढैय्या सक्रिय है। नियमित हनुमान चालीसा शक्ति देगी।', careerEn: 'Medical surgery, chemical research, deep investigation, and technical roles.', careerHi: 'फार्मा, सर्जरी, रक्षा विभाग व खोजी कार्य।' },
+      Dhanu: { lordEn: 'Jupiter (गुरु)', lordHi: 'बृहस्पति (गुरु)', stoneEn: 'Yellow Sapphire (पुखराज)', colorEn: 'Bright Yellow (पीला)', num: 3, nakshatra: 'Mula / Purva Ashadha', lagna: 'Dhanu (धनु)', sadeSatiEn: 'Completely free from Sade Sati. A beautiful period for higher learning and peace.', sadeSatiHi: 'साढ़े साती से पूरी तरह मुक्त। उन्नति और आत्मिक शांति का समय।', careerEn: 'Higher education, advisory, law, banking, writing, and spiritual guidance.', careerHi: 'शिक्षा, वित्त, परामर्श, कानून व प्रकाशन।' },
+      Makar: { lordEn: 'Saturn (शनि)', lordHi: 'शनि देव', stoneEn: 'Blue Sapphire (नीलम) / Amethyst', colorEn: 'Navy Blue / Charcoal', num: 8, nakshatra: 'Uttara Ashadha / Shravana', lagna: 'Makara (मकर)', sadeSatiEn: 'Final descending phase (Utarti) of Sade Sati. Gentle relief and rewards are arriving.', sadeSatiHi: 'साढ़े साती का अंतिम चरण (उतरती)। अब राहत और लाभ के योग।', careerEn: 'Architecture, structural engineering, logistics, administration, and corporate law.', careerHi: 'निर्माण, मैन्युफैक्चरिंग, कृषि व लॉजिस्टिक्स।' },
+      Kumbh: { lordEn: 'Saturn (शनि)', lordHi: 'शनि देव', stoneEn: 'Blue Sapphire (नीलम)', colorEn: 'Electric Blue', num: 8, nakshatra: 'Dhanishta / Shatabhisha', lagna: 'Kumbha (कुंभ)', sadeSatiEn: 'Peak phase of Sade Sati. Stay patient, grounded, and generous to others.', sadeSatiHi: 'साढ़े साती का मुख्य चरण। धैर्य और सेवा भाव से सब शांत रहेगा।', careerEn: 'Innovative technologies, social welfare, aerospace, and deep scientific study.', careerHi: 'तकनीक, विमानन, विज्ञान व सामाजिक कार्य।' },
+      Meen: { lordEn: 'Jupiter (गुरु)', lordHi: 'बृहस्पति (गुरु)', stoneEn: 'Yellow Sapphire (पुखराज)', colorEn: 'Warm Golden Yellow', num: 3, nakshatra: 'Purva Bhadrapada / Revati', lagna: 'Meena (मीन)', sadeSatiEn: 'Initial ascending phase (Chadhti) of Sade Sati. Daily meditation keeps intuition pure.', sadeSatiHi: 'साढ़े साती का प्रथम चरण (चढ़ती)। ध्यान और शांति से लाभ होगा।', careerEn: 'Creative storytelling, arts, psychology, international trade, and healing.', careerHi: 'कला, साहित्य, परामर्श, विदेश व्यापार व मनोविज्ञान।' }
     };
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -728,12 +795,11 @@
     function selectAstrologer(key) {
       currentAstrologer = key;
       document.querySelectorAll('.astro-card').forEach(c => c.classList.remove('selected'));
-      if (key === 'shastri') document.getElementById('cardAstro1').classList.add('selected');
-      if (key === 'radhika') document.getElementById('cardAstro2').classList.add('selected');
-      if (key === 'mishra') document.getElementById('cardAstro3').classList.add('selected');
+      const activeCard = document.getElementById(`cardAstro_${key}`);
+      if (activeCard) activeCard.classList.add('selected');
 
       const astro = astrologers[key];
-      document.getElementById('chatHeaderIcon').innerText = astro.icon;
+      document.getElementById('chatHeaderImg').src = astro.img;
       document.getElementById('txtActiveAstroName').innerText = astro.name;
       document.getElementById('txtActiveAstroSpec').innerText = (currentLang === 'en') ? astro.specEn : astro.specHi;
 
@@ -757,44 +823,35 @@
       sendMessage();
     }
 
-    // GIBBERISH / KEYBOARD MASHING DETECTOR
     function isGibberish(text) {
       const clean = text.trim().toLowerCase();
       if (clean.length < 2) return true;
-      if (/^(.)\1+$/.test(clean)) return true; // e.g. "aaaaa"
+      if (/^(.)\1+$/.test(clean)) return true;
 
       const words = clean.split(/\s+/);
       for (const w of words) {
-        if (w.length >= 5 && !/[aeiouy]/.test(w)) return true; // no vowels in long word
-        if (/[bcdfghjklmnpqrstvwxyz]{6,}/i.test(w)) return true; // 6 consonants in a row
+        if (w.length >= 5 && !/[aeiouy]/.test(w)) return true;
+        if (/[bcdfghjklmnpqrstvwxyz]{6,}/i.test(w)) return true;
       }
       return false;
     }
 
-    // CALCULATE MOON SIGN (RASHI) & LAGNA MATHEMATICALLY FROM DOB & TOB
     function computeKundali(d, m, y, tobStr) {
-      // Approximate Vedic Sidereal Moon Sign based on Julian Day Number
       const jd = Math.floor((1461 * (y + 4800 + Math.floor((m - 14) / 12))) / 4) +
                  Math.floor((367 * (m - 2 - 12 * Math.floor((m - 14) / 12))) / 12) -
                  Math.floor((3 * Math.floor((y + 4900 + Math.floor((m - 14) / 12)) / 100)) / 4) +
                  d - 32075;
 
       const rashiKeys = ['Mesh', 'Vrishabha', 'Mithun', 'Kark', 'Simha', 'Kanya', 'Tula', 'Vrishchik', 'Dhanu', 'Makar', 'Kumbh', 'Meen'];
-      
-      // Sidereal moon transit approximation: ~2.25 days per rashi
       const moonRashiIdx = Math.floor(Math.abs(jd + 4) / 2.25) % 12;
       const moonRashi = rashiKeys[moonRashiIdx];
 
-      // Ascendant (Lagna) changes roughly every 2 hours
       let [hh, mm] = tobStr.split(':').map(Number);
       if (isNaN(hh)) hh = 12;
       const lagnaOffset = Math.floor((hh + (m * 2)) / 2) % 12;
       const lagnaRashi = rashiKeys[lagnaOffset];
 
-      return {
-        rashi: moonRashi,
-        lagna: lagnaRashi
-      };
+      return { rashi: moonRashi, lagna: lagnaRashi };
     }
 
     function sendMessage() {
@@ -809,7 +866,6 @@
       input.value = '';
       chatBody.scrollTop = chatBody.scrollHeight;
 
-      // Realistic typing indicator
       typing.style.display = 'flex';
       chatBody.scrollTop = chatBody.scrollHeight;
 
@@ -828,105 +884,99 @@
       return div;
     }
 
-    // REAL-LIFE CONVERSATIONAL LOGIC
     function processChatMessage(userMsg) {
       const astro = astrologers[currentAstrologer];
 
-      // GIBBERISH CHECK
       if (isGibberish(userMsg)) {
         if (currentLang === 'hi') {
-          return `क्षमा करें, मुझे यह समझ नहीं आया। कृपया स्पष्ट शब्दों में अपना उत्तर लिखें।`;
+          return `क्षमा करें प्रिय, मुझे यह समझ नहीं आया। क्या आप अपना संदेश साफ़ शब्दों में लिख सकते हैं?`;
         }
-        return `I couldn't quite understand that. Could you please reply clearly in plain words?`;
+        return `I couldn't quite make that out, dear. Could you please rephrase in gentle words?`;
       }
 
-      // STEP 1: ASKING NAME
+      // STEP 1: NAME
       if (chatState === 'ask_name') {
-        userProfile.name = userMsg.replace(/(my name is|i am|mera naam|naam)/gi, '').trim();
+        userProfile.name = userMsg.replace(/(my name is|i am|mera naam|naam|im)/gi, '').trim();
         chatState = 'ask_gender';
 
         if (currentLang === 'hi') {
-          return `प्रसन्नता हुई <strong>${userProfile.name} जी</strong>।<br><br>सटीक कुंडली विश्लेषण के लिए कृपया अपना <strong>जेंडर (Gender)</strong> बताएं:
+          return `आपसे मिलकर बहुत अच्छा लगा, <strong>${userProfile.name} जी</strong>।<br><br>आपकी कुंडली के दांपत्य व स्वास्थ्य भावों को सही तरह समझने के लिए, कृपया अपना <strong>जेंडर (Gender)</strong> बताएं:
             <div class="in-chat-actions">
-              <button class="action-btn" onclick="chooseAction('पुरुष (Male)')">पुरुष (Male)</button>
               <button class="action-btn" onclick="chooseAction('महिला (Female)')">महिला (Female)</button>
+              <button class="action-btn" onclick="chooseAction('पुरुष (Male)')">पुरुष (Male)</button>
               <button class="action-btn" onclick="chooseAction('अन्य (Other)')">अन्य (Other)</button>
             </div>`;
         }
-        return `Pleasure to meet you, <strong>${userProfile.name}</strong>.<br><br>To calculate appropriate marriage and planetary houses, could you tell me your <strong>Gender</strong>?
+        return `It is lovely to connect with you, <strong>${userProfile.name}</strong>.<br><br>To analyze relationship and physical harmony correctly in your chart, could you share your <strong>Gender</strong> with me?
           <div class="in-chat-actions">
-            <button class="action-btn" onclick="chooseAction('Male')">Male</button>
             <button class="action-btn" onclick="chooseAction('Female')">Female</button>
+            <button class="action-btn" onclick="chooseAction('Male')">Male</button>
             <button class="action-btn" onclick="chooseAction('Other')">Other</button>
           </div>`;
       }
 
-      // STEP 2: ASKING GENDER
+      // STEP 2: GENDER
       if (chatState === 'ask_gender') {
         userProfile.gender = userMsg.trim();
         chatState = 'ask_dob';
 
         if (currentLang === 'hi') {
-          return `धन्यवाद। अब कृपया अपनी <strong>जन्म तिथि (Date of Birth)</strong> बताएं?<br><small style="color:var(--muted);">(उदा: 15 July 1998 या 15/07/1998)</small>`;
+          return `धन्यवाद। अब कृपया अपनी <strong>जन्म तिथि (Date of Birth)</strong> बताएं?<br><small style="color:var(--muted);">(उदा: 14 October 1998 या 14/10/1998)</small>`;
         }
-        return `Understood. Next, what is your <strong>Date of Birth (DOB)</strong>?<br><small style="color:var(--muted);">(For example: 15 July 1998 or 15/07/1998)</small>`;
+        return `Thank you so much. Now, what is your <strong>Date of Birth (DOB)</strong>?<br><small style="color:var(--muted);">(For instance: 14 October 1998 or 14/10/1998)</small>`;
       }
 
-      // STEP 3: ASKING DOB
+      // STEP 3: DOB
       if (chatState === 'ask_dob') {
-        // Simple regex parser for DOB
         const dMatch = userMsg.match(/(\d{1,2})[\/\-\.\s]+(\d{1,2}|[a-zA-Z]{3,9})[\/\-\.\s]+(\d{4})/);
         if (!dMatch && !/\d{4}/.test(userMsg)) {
           if (currentLang === 'hi') {
-            return `कृपया अपनी जन्म तारीख वर्ष सहित लिखें (जैसे: <em>15 August 1998</em> या <em>15/08/1998</em>), ताकि सही ग्रह दशा ज्ञात हो सके।`;
+            return `कृपया जन्म तारीख वर्ष सहित बताएं (जैसे: <em>14 October 1998</em> या <em>14/10/1998</em>), ताकि ग्रहों की चाल सटीक निकल सके।`;
           }
-          return `Please provide your birth date including the birth year (for example: <em>15 August 1998</em> or <em>15/08/1998</em>) so I can map your planetary degrees.`;
+          return `Could you please share your birth date along with the birth year (e.g. <em>14 October 1998</em> or <em>14/10/1998</em>)? This helps me pinpoint the exact degree of the Moon.`;
         }
 
-        // Store DOB representation
         userProfile.rawDob = userMsg.trim();
         chatState = 'ask_tob';
 
         if (currentLang === 'hi') {
-          return `बहुत अच्छा। क्या आपको अपना <strong>जन्म समय (Time of Birth)</strong> ज्ञात है?<br><small style="color:var(--muted);">यदि सटीक समय ज्ञात न हो, तो अनुमानित समय (सुबह, दोपहर, या शाम) बताएं:</small>
+          return `बहुत सुंदर। क्या आपको अपना <strong>जन्म समय (Time of Birth)</strong> याद है?<br><small style="color:var(--muted);">यदि सटीक मिनट याद न हो, तो अनुमानित पहर चुन लें:</small>
             <div class="in-chat-actions">
-              <button class="action-btn" onclick="chooseAction('सुबह (Morning 08:00 AM)')">सुबह (Morning)</button>
-              <button class="action-btn" onclick="chooseAction('दोपहर (Afternoon 12:30 PM)')">दोपहर (Afternoon)</button>
-              <button class="action-btn" onclick="chooseAction('शाम (Evening 06:00 PM)')">शाम (Evening)</button>
-              <button class="action-btn" onclick="chooseAction('रात (Night 10:00 PM)')">रात (Night)</button>
+              <button class="action-btn" onclick="chooseAction('सुबह (Morning 07:30 AM)')">सुबह (Morning)</button>
+              <button class="action-btn" onclick="chooseAction('दोपहर (Afternoon 01:15 PM)')">दोपहर (Afternoon)</button>
+              <button class="action-btn" onclick="chooseAction('शाम (Evening 06:45 PM)')">शाम (Evening)</button>
+              <button class="action-btn" onclick="chooseAction('रात (Night 11:30 PM)')">रात (Night)</button>
             </div>`;
         }
-        return `Got it. What was your approximate <strong>Time of Birth (TOB)</strong>?<br><small style="color:var(--muted);">If you don't know the exact minute, an estimate is fine:</small>
+        return `Wonderful. Do you happen to know your approximate <strong>Time of Birth</strong>?<br><small style="color:var(--muted);">If you do not know the exact minute, a rough time of day is completely fine:</small>
           <div class="in-chat-actions">
-            <button class="action-btn" onclick="chooseAction('Morning (08:00 AM)')">Morning</button>
-            <button class="action-btn" onclick="chooseAction('Afternoon (12:30 PM)')">Afternoon</button>
-            <button class="action-btn" onclick="chooseAction('Evening (06:00 PM)')">Evening</button>
-            <button class="action-btn" onclick="chooseAction('Night (10:00 PM)')">Night</button>
+            <button class="action-btn" onclick="chooseAction('Morning (07:30 AM)')">Morning</button>
+            <button class="action-btn" onclick="chooseAction('Afternoon (01:15 PM)')">Afternoon</button>
+            <button class="action-btn" onclick="chooseAction('Evening (06:45 PM)')">Evening</button>
+            <button class="action-btn" onclick="chooseAction('Night (11:30 PM)')">Night</button>
           </div>`;
       }
 
-      // STEP 4: ASKING TOB
+      // STEP 4: TOB
       if (chatState === 'ask_tob') {
         userProfile.tob = userMsg.trim();
         chatState = 'ask_place';
 
         if (currentLang === 'hi') {
-          return `अंतिम विवरण: आपका <strong>जन्म स्थान (Birth City / State)</strong> क्या है?<br><small style="color:var(--muted);">(उदा: गोरखपुर, वाराणसी, पटना, दिल्ली, आदि)</small>`;
+          return `बस एक अंतिम बात: आपका <strong>जन्म स्थान (Birth City / Town)</strong> क्या है?<br><small style="color:var(--muted);">(उदा: गोरखपुर, वाराणसी, पटना, लखनऊ, दिल्ली आदि)</small>`;
         }
-        return `One final detail: In which <strong>City / Place</strong> were you born?<br><small style="color:var(--muted);">(For example: Gorakhpur, Patna, Delhi, Mumbai)</small>`;
+        return `Just one last little thing: In which <strong>City or Town</strong> were you born?<br><small style="color:var(--muted);">(e.g. Gorakhpur, Lucknow, Patna, Mumbai, Delhi)</small>`;
       }
 
-      // STEP 5: ASKING PLACE -> CAST KUNDALI CHART!
+      // STEP 5: PLACE -> COMPUTE & CAST
       if (chatState === 'ask_place') {
         userProfile.place = userMsg.trim();
         chatState = 'ready';
         userProfile.isChartReady = true;
 
-        // Perform Astrological Ephemeris Calculation
-        // Extract numbers or fallback
-        const nums = (userProfile.rawDob.match(/\d+/g) || [15, 7, 1998]).map(Number);
-        const day = nums[0] > 31 ? 15 : nums[0];
-        const month = nums[1] > 12 ? 7 : (nums[1] || 7);
+        const nums = (userProfile.rawDob.match(/\d+/g) || [14, 10, 1998]).map(Number);
+        const day = nums[0] > 31 ? 14 : nums[0];
+        const month = nums[1] > 12 ? 10 : (nums[1] || 10);
         const year = nums[2] || 1998;
 
         const calculated = computeKundali(day, month, year, userProfile.tob);
@@ -935,7 +985,6 @@
 
         const rInfo = rashiData[userProfile.rashi];
 
-        // Unlock the top Kundali Drawer
         const drawer = document.getElementById('kundaliDrawer');
         drawer.classList.remove('locked');
 
@@ -954,70 +1003,69 @@
         document.getElementById('mLord').innerText = (currentLang === 'en') ? rInfo.lordEn : rInfo.lordHi;
         document.getElementById('mLord').style.color = 'var(--primary)';
 
-        // Enable quick prompt chips
         document.getElementById('chipsBar').style.opacity = '1';
         document.getElementById('chipsBar').style.pointerEvents = 'auto';
         document.getElementById('userInput').placeholder = (currentLang === 'en')
-          ? `Ask ${astro.name} about your career, marriage, or remedies...`
-          : `${astro.name} से अपना प्रश्न पूछें...`;
+          ? `Ask ${astro.name} anything on your mind...`
+          : `${astro.name} से अपने मन की बात पूछें...`;
 
         if (currentLang === 'hi') {
-          return `✨ <strong>आपकी वैदिक जन्म कुण्डली तैयार है, ${userProfile.name} जी!</strong><br><br>
-          • <strong>चन्द्र राशि (Moon Sign):</strong> ${userProfile.rashi}<br>
-          • <strong>लग्न (Ascendant):</strong> ${rInfo.lagna}<br>
+          return `✨ <strong>आपकी सुंदर जन्म कुण्डली तैयार हो गई है, ${userProfile.name} जी!</strong><br><br>
+          • <strong>चन्द्र राशि:</strong> ${userProfile.rashi}<br>
+          • <strong>लग्न:</strong> ${rInfo.lagna}<br>
           • <strong>जन्म नक्षत्र:</strong> ${rInfo.nakshatra}<br>
           • <strong>राशि स्वामी:</strong> ${rInfo.lordHi}<br><br>
-          आपकी जन्म कुंडली मेरे सम्मुख सक्रिय हो चुकी है। अब आप मुझसे <strong>करियर/नौकरी, विवाह योग, साढ़े साती, अथवा भाग्यशाली रत्न</strong> के बारे में जो चाहें पूछ सकते हैं!`;
+          आपकी कुंडली मेरे सामने खुल चुकी है। आप निश्चिंत होकर मुझसे अपने <strong>रिश्तों, विवाह के समय, करियर की प्रगति, अथवा ग्रह शांति</strong> के बारे में पूछें। मैं हर कदम पर आपका साथ दूंगी।`;
         }
 
-        return `✨ <strong>Your Natal Kundali is ready, ${userProfile.name}!</strong><br><br>
+        return `✨ <strong>Your birth chart has bloomed beautifully, ${userProfile.name}!</strong><br><br>
         • <strong>Moon Sign (Rashi):</strong> ${userProfile.rashi}<br>
         • <strong>Ascendant (Lagna):</strong> ${rInfo.lagna}<br>
         • <strong>Birth Star (Nakshatra):</strong> ${rInfo.nakshatra}<br>
         • <strong>Ruling Lord:</strong> ${rInfo.lordEn}<br><br>
-        Your chart is active in front of me. What would you like to inquire about today? You can ask about <strong>Job & Promotion, Marriage Timing, Shani Sade Sati, or Gemstones</strong>!`;
+        I have your houses open right in front of me now. Please feel free to open your heart—ask about <strong>Soulmate & Marriage Timing, Career Opportunities, or Restoring Planetary Peace</strong>!`;
       }
 
-      // STEP 6: KUNDALI IS READY -> ANSWER USER INQUIRIES
+      // STEP 6: CONVERSATION WITH EMPATHY & SOFT REAL-LIFE TONE
       const q = userMsg.toLowerCase();
       const rKey = userProfile.rashi;
       const r = rashiData[rKey];
       const name = userProfile.name;
 
       if (currentLang === 'hi') {
-        if (q.includes('job') || q.includes('career') || q.includes('नौकरी') || q.includes('काम') || q.includes('व्यापार') || q.includes('business')) {
-          return `💼 <strong>${astro.name} का करियर विश्लेषण (${name} जी):</strong><br>आपकी <strong>${rKey}</strong> राशि के स्वामी <strong>${r.lordHi}</strong> हैं। आपकी कुंडली के 10वें भाव (कर्म भाव) का लग्न <em>${r.lagna}</em> के साथ शुभ संबंध है। आपके लिए श्रेष्ठ क्षेत्र: <em>${r.careerHi}</em><br><br>💡 <strong>उपाय:</strong> महत्वपूर्ण कार्य हमेशा दिन के शुभ चौघड़िया में करें और नियमित सूर्य को अर्घ्य दें।`;
+        if (q.includes('job') || q.includes('career') || q.includes('नौकरी') || q.includes('काम') || q.includes('व्यापार') || q.includes('business') || q.includes('promotion')) {
+          return `💼 <strong>${astro.name} का स्नेहपूर्ण मार्गदर्शन (${name} जी):</strong><br>आपकी <strong>${rKey}</strong> राशि के स्वामी <strong>${r.lordHi}</strong> हैं। आपकी कुंडली के 10वें भाव (कर्म भाव) को देखकर मैं आपको आश्वस्त करना चाहती हूँ कि आपकी मेहनत व्यर्थ नहीं जाएगी। आपके लिए श्रेष्ठ क्षेत्र: <em>${r.careerHi}</em><br><br>💡 <strong>सुझाव:</strong> आने वाले समय में अपने विचारों पर भरोसा रखें। किसी भी नए काम की शुरुआत दिन के शुभ चौघड़िया (अमृत/शुभ) में करें। नियमित सूर्य देव को जल अर्पित करने से रुकावटें स्वतः दूर होंगी।`;
         }
-        if (q.includes('marriage') || q.includes('विवाह') || q.includes('शादी') || q.includes('love') || q.includes('partner') || q.includes('प्रेम')) {
-          return `💍 <strong>${astro.name} का दांपत्य विश्लेषण:</strong><br>${name} जी, आपकी <strong>${rKey}</strong> राशि के 7वें भाव (विवाह भाव) के अनुसार मानसिक सौहार्द के लिए विवाह से पूर्व कम से कम 18 से अधिक गुण मिलान अवश्य करें।<br><br>🕊️ <strong>उपाय:</strong> गुरुवार को पीले वस्त्र या हल्दी का तिलक लगाएं और भगवान विष्णु की आराधना करें।`;
+        if (q.includes('marriage') || q.includes('विवाह') || q.includes('शादी') || q.includes('love') || q.includes('partner') || q.includes('प्रेम') || q.includes('soulmate')) {
+          return `💍 <strong>${name} जी, आपके दांपत्य व प्रेम भाव का विश्लेषण:</strong><br>आपकी <strong>${rKey}</strong> कुंडली में 7वां भाव आपसी समझ और आत्मिक शांति का प्रतीक है। जब भी आप विवाह या रिश्ते की बात आगे बढ़ाएं, तो 18 से अधिक गुण मिलान और दोनों के बीच की मधुर बातचीत को प्राथमिकता दें।<br><br>🕊️ <strong>एक प्यारा सा उपाय:</strong> गुरुवार को मन में शांति रखकर भगवान विष्णु अथवा केले के वृक्ष को जल दें। दांपत्य जीवन में अपार स्नेह और विश्वास बना रहेगा।`;
         }
-        if (q.includes('shani') || q.includes('sade sati') || q.includes('शनि') || q.includes('साढ़े साती') || q.includes('ढैय्या')) {
-          return `🪐 <strong>${astro.name} का शनि गोचर विश्लेषण:</strong><br><strong>वर्तमान स्थिति:</strong> ${r.sadeSatiHi}<br><br>⚡ <strong>सरल अचूक उपाय:</strong> प्रत्येक शनिवार सूर्यास्त के समय पीपल के वृक्ष के नीचे सरसों के तेल का दीपक जलाएं और <em>ॐ शं शनैश्चराय नमः</em> का जाप करें।`;
+        if (q.includes('shani') || q.includes('sade sati') || q.includes('शनि') || q.includes('साढ़े साती') || q.includes('ढैय्या') || q.includes('peace') || q.includes('डर')) {
+          return `🪐 <strong>${astro.name} का दिलासा:</strong><br>${name} जी, शनिदेव से भयभीत होने की बिल्कुल आवश्यकता नहीं है। <strong>आपकी वर्तमान स्थिति:</strong> ${r.sadeSatiHi}<br><br>⚡ <strong>सरल उपाय:</strong> प्रत्येक शनिवार सूर्यास्त के समय पीपल के वृक्ष के नीचे सरसों के तेल का एक छोटा सा दीपक जलाएं और मन में <em>ॐ शं शनैश्चराय नमः</em> बोलें। जो लोग दूसरों की मदद करते हैं, शनिदेव सदैव उनकी रक्षा करते हैं।`;
         }
         if (q.includes('gemstone') || q.includes('stone') || q.includes('रत्न') || q.includes('color') || q.includes('रंग')) {
-          return `💎 <strong>${astro.name} की रत्न व शुभ तत्व अनुशंसा:</strong><br>• <strong>प्रधान रत्न:</strong> ${r.stoneEn}<br>• <strong>शुभ रंग:</strong> ${r.colorEn}<br>• <strong>भाग्यशाली अंक:</strong> ${r.num}<br>• <strong>राशि स्वामी:</strong> ${r.lordHi}<br><br><em>सलाह: रत्न हमेशा अनामिका या कनिष्ठा उंगली में शुभ मुहूर्त में ही धारण करें।</em>`;
+          return `💎 <strong>${name} जी, आपके लिए सकारात्मक तत्व व रत्न:</strong><br>• <strong>शुभ रत्न:</strong> ${r.stoneEn}<br>• <strong>सौभाग्यशाली रंग:</strong> ${r.colorEn}<br>• <strong>भाग्यशाली अंक:</strong> ${r.num}<br>• <strong>राशि स्वामी:</strong> ${r.lordHi}<br><br><em>सुझाव:</em> अपने लकी रंग के वस्त्र महत्वपूर्ण मुलाकातों में पहनें, इससे आपकी आभा (aura) बहुत सकारात्मक रहेगी।`;
         }
-        if (q.includes('remedy') || q.includes('उपाय') || q.includes('दोष') || q.includes('hurdle') || q.includes('रुकावट')) {
-          return `📿 <strong>${name} जी के लिए रुकावट निवारण उपाय:</strong><br>आपकी ${rKey} राशि के अनुसार बाधाएं शांत करने के लिए:<br>1. प्रतिदिन प्रातः सूर्य को तांबे के लोटे से जल दें।<br>2. अपने शुभ रंग (<strong>${r.colorEn}</strong>) का अधिक उपयोग करें।<br>3. मंगलवार अथवा शनिवार को हनुमान चालीसा का पाठ करें।`;
+        if (q.includes('remedy') || q.includes('उपाय') || q.includes('दोष') || q.includes('hurdle') || q.includes('रुकावट') || q.includes('शांति')) {
+          return `📿 <strong>${name} जी के लिए मन की शांति व रुकावट निवारण:</strong><br>1. प्रतिदिन सुबह तांबे के लोटे से सूर्य भगवान को प्रणाम करते हुए जल अर्पित करें।<br>2. अपने भाग्यशाली रंग (<strong>${r.colorEn}</strong>) का रुमाल या वस्त्र साथ रखें।<br>3. मंगलवार अथवा शनिवार को हनुमान चालीसा का पाठ करें—मन का भारीपन तुरंत शांत हो जाएगा।`;
         }
-        return `🕉️ <strong>${astro.name}:</strong><br>${name} जी, आपकी <strong>${rKey}</strong> कुंडली मेरे समक्ष खुली है। आप मुझसे विशेष रूप से <strong>करियर/नौकरी, विवाह का समय, शनि साढ़े साती, अथवा सही रत्न</strong> के बारे में पूछें, मैं विस्तार से बताऊंगा।`;
+        return `🌸 <strong>${astro.name}:</strong><br>${name} जी, आपकी <strong>${rKey}</strong> कुंडली पूरी तरह मेरे सामने है। आप निश्चिंत होकर मुझसे अपने करियर, प्रेम संबंध, विवाह योग, अथवा किसी पारिवारिक चिंता के बारे में साझा कर सकते हैं।`;
       } else {
-        if (q.includes('job') || q.includes('career') || q.includes('promotion') || q.includes('business') || q.includes('work')) {
-          return `💼 <strong>${astro.name}'s Career Guidance for ${name}:</strong><br>Ruled by <strong>${r.lordEn}</strong>, your 10th house of profession (Lagna: <em>${r.lagna}</em>) highlights key strengths in: <em>${r.careerEn}</em>.<br><br>💡 <strong>Practical Advice:</strong> Consistency will yield strong gains. Execute important deals and interviews during auspicious morning Choghadiya windows.`;
+        if (q.includes('job') || q.includes('career') || q.includes('promotion') || q.includes('business') || q.includes('work') || q.includes('growth')) {
+          return `💼 <strong>${astro.name}'s Gentle Guidance for ${name}:</strong><br>Ruled by <strong>${r.lordEn}</strong> with your Ascendant in <em>${r.lagna}</em>, your 10th house shows admirable resilience. Your natural fields of thriving are: <em>${r.careerEn}</em>.<br><br>💡 <strong>Encouragement:</strong> If you have felt delayed lately, take heart—transits are slowly shifting in your favor. Take important interviews or launch new ventures during daytime auspicious Choghadiya hours.`;
         }
-        if (q.includes('marriage') || q.includes('wedding') || q.includes('relationship') || q.includes('love') || q.includes('partner')) {
-          return `💍 <strong>${astro.name}'s Marriage Guidance for ${name}:</strong><br>In your <strong>${rKey}</strong> natal chart, the 7th house of alliances indicates mental compatibility flourishes when Ashtakoot score exceeds 18 points without unmitigated Nadi dosha.<br><br>🕊️ <strong>Remedy:</strong> Offer water to Surya Dev every morning for emotional clarity.`;
+        if (q.includes('marriage') || q.includes('wedding') || q.includes('relationship') || q.includes('love') || q.includes('partner') || q.includes('soulmate')) {
+          return `💍 <strong>${astro.name}'s Heartfelt Relationship Reading for ${name}:</strong><br>In your <strong>${rKey}</strong> chart, the 7th house of lifelong bonds seeks emotional resonance above all. When considering a life partner, look for shared values and an Ashtakoot score above 18 points.<br><br>🕊️ <strong>Gentle Remedy:</strong> Offer fresh water to the morning sun daily. It harmonizes heart energy and clears misunderstandings with those you love.`;
         }
-        if (q.includes('shani') || q.includes('sade sati') || q.includes('saturn') || q.includes('dhaiya')) {
-          return `🪐 <strong>${astro.name}'s Saturn (Shani) Report for ${name}:</strong><br><strong>Current Status:</strong> ${r.sadeSatiEn}<br><br>⚡ <strong>Vedic Remedy:</strong> Light a mustard oil lamp under a Peepal tree on Saturday evenings and chant <em>Om Sham Shanaishcharaya Namah</em>. Charitable giving neutralizes malefic transit friction.`;
+        if (q.includes('shani') || q.includes('sade sati') || q.includes('saturn') || q.includes('dhaiya') || q.includes('fear') || q.includes('stress')) {
+          return `🪐 <strong>${astro.name}'s Reassurance on Planetary Transits:</strong><br>${name}, you need not fear Saturn (Shani). <strong>Your status:</strong> ${r.sadeSatiEn}<br><br>⚡ <strong>Gentle Remedy:</strong> Light a small mustard oil lamp under a Peepal tree on Saturday evenings and chant <em>Om Sham Shanaishcharaya Namah</em>. Genuine acts of kindness to workers or street animals naturally dissolve planetary friction.`;
         }
         if (q.includes('gemstone') || q.includes('stone') || q.includes('lucky') || q.includes('color') || q.includes('number')) {
-          return `💎 <strong>${astro.name}'s Gemstone & Elements for ${name}:</strong><br>• <strong>Primary Gemstone:</strong> ${r.stoneEn}<br>• <strong>Lucky Colors:</strong> ${r.colorEn}<br>• <strong>Destiny Number:</strong> ${r.num}<br>• <strong>Ruling Planet:</strong> ${r.lordEn}<br><br><em>Tip: Always energize gemstones on their corresponding planetary weekday during Shukla Paksha.</em>`;
+          return `💎 <strong>${name}, Auspicious Elements to Nurture Your Aura:</strong><br>• <strong>Primary Gemstone:</strong> ${r.stoneEn}<br>• <strong>Lucky Colors:</strong> ${r.colorEn}<br>• <strong>Destiny Number:</strong> ${r.num}<br>• <strong>Ruling Lord:</strong> ${r.lordEn}<br><br><em>Tip: Wearing your lucky colors during important meetings brings a gentle, confident glow to your presence.</em>`;
         }
-        if (q.includes('remedy') || q.includes('hurdle') || q.includes('obstacle') || q.includes('dosha')) {
-          return `📿 <strong>Vedic Remedial Guidance for ${name}:</strong><br>To remove delays and obstacles in your ${rKey} chart:<br>1. Offer water to the rising sun daily in a copper vessel.<br>2. Incorporate your lucky color (<strong>${r.colorEn}</strong>) into interviews or business meetings.<br>3. Recite the Gayatri Mantra 11 times every morning.`;
+        if (q.includes('remedy') || q.includes('hurdle') || q.includes('obstacle') || q.includes('dosha') || q.includes('peace')) {
+          return `📿 <strong>Gentle Daily Remedies for ${name}:</strong><br>1. Offer water to the rising sun from a copper vessel with gratitude.<br>2. Keep a soft touch of your lucky color (<strong>${r.colorEn}</strong>) near you.<br>3. Take 5 minutes before sleep to chant the Gayatri Mantra or breathe in quiet reflection.`;
         }
-        return `🕉️ <strong>${astro.name}:</strong><br>${name}, your <strong>${rKey}</strong> chart is active in front of me. What specific question do you have regarding your <strong>Career, Marriage, Shani Sade Sati, or Gemstones</strong>?`;
+        return `🌸 <strong>${astro.name}:</strong><br>${name}, your <strong>${rKey}</strong> chart is glowing right before my eyes. Please feel completely at ease to ask me anything regarding your <strong>Career, Relationships, Marriage, or Mental Peace</strong>.`;
       }
     }
 
@@ -1026,17 +1074,19 @@
 
       if (currentLang === 'hi') {
         document.getElementById('btnLangText').innerText = 'Switch to English';
-        document.getElementById('txtTitle').innerText = 'विशेषज्ञ वैदिक ज्योतिषियों से निःशुल्क परामर्श लें';
-        document.getElementById('txtSubtitle').innerText = 'ज्योतिषी से सीधे बात करें। बातचीत में अपना जन्म विवरण देकर अपनी कुंडली बनाएं और करियर, विवाह व उपायों की सटीक जानकारी पाएं।';
+        document.getElementById('txtTitle').innerText = 'विशेषज्ञ वैदिक ज्योतिषियों से आत्मीय परामर्श लें';
+        document.getElementById('txtSubtitle').innerText = 'बातचीत में अपना जन्म विवरण देकर अपनी कुंडली बनाएं और करियर, प्रेम संबंध, विवाह व ग्रह शांति के सच्चे, स्नेहपूर्ण उपाय पाएं।';
         document.getElementById('lblChooseAstro').innerText = 'ज्योतिषी चुनें (Choose Astrologer):';
         document.getElementById('btnSend').innerText = 'भेजें ➤';
+        document.getElementById('userInput').placeholder = userProfile.isChartReady ? 'अपने मन का प्रश्न यहाँ पूछें...' : 'यहाँ अपना उत्तर लिखें...';
         document.getElementById('txtZeroStorage').innerText = '100% सुरक्षित (Zero Storage): आपकी कोई भी चैट या जन्म विवरण किसी सर्वर पर नहीं भेजा जाता।';
       } else {
         document.getElementById('btnLangText').innerText = 'हिंदी में बदलें (Hindi)';
-        document.getElementById('txtTitle').innerText = 'Talk to Expert Vedic Astrologers for Free';
-        document.getElementById('txtSubtitle').innerText = 'An authentic 1-on-1 Vedic consultation. Share your details naturally with the astrologer to cast your Kundali, then ask about career, marriage, and remedies with zero charges.';
+        document.getElementById('txtTitle').innerText = 'Talk to Compassionate Vedic Astrologers for Free';
+        document.getElementById('txtSubtitle').innerText = 'Connect 1-on-1 with genuine, empathetic astrologers. Share your birth details to cast your Kundali, then ask about relationships, career, and inner peace with zero fees or data tracking.';
         document.getElementById('lblChooseAstro').innerText = 'Select Astrologer (ज्योतिषी चुनें):';
         document.getElementById('btnSend').innerText = 'Send ➤';
+        document.getElementById('userInput').placeholder = userProfile.isChartReady ? 'Ask anything on your mind...' : 'Type your answer softly here...';
         document.getElementById('txtZeroStorage').innerText = '100% Private & In-Browser: No mobile numbers, cookies, or chat logs are ever uploaded to any server.';
       }
 
